@@ -38,19 +38,23 @@ int main(int argc, char* argv[]) {
 	double timeHODLR3DRepres =	(end-start);
 
 	/////////////////////////////////////////////////////////////////////////
-	int N = A->N;
-	Eigen::VectorXd b=Eigen::VectorXd::Zero(N);
-  int n = N/500; //randomly choosing n different indices where b is set to 1, b at the rest of the indices is set to 0
-  srand(time(NULL));
-  std::set<int> s;
-  while(s.size() < n) {
-    int index	=	rand()%N;
-    s.insert(index);
-  }
-  std::set<int>::iterator it;
-  for (it = s.begin(); it != s.end(); it++) {
-    b(*it) = 1.0;
-  }
+	// For testing the code, b is considered to be a vector of ones and zeros in the following code snippet
+	// accordingly true_Ab is calculated later
+	{
+		int N = A->N;
+		Eigen::VectorXd b=Eigen::VectorXd::Zero(N);
+	  int n = N/500; //randomly choosing n different indices where b is set to 1, b at the rest of the indices is set to 0
+	  srand(time(NULL));
+	  std::set<int> s;
+	  while(s.size() < n) {
+	    int index	=	rand()%N;
+	    s.insert(index);
+	  }
+	  std::set<int>::iterator it;
+	  for (it = s.begin(); it != s.end(); it++) {
+	    b(*it) = 1.0;
+	  }
+	}
 	A->assignCharges(b);
 
 	A->evaluateFarField();
@@ -74,7 +78,7 @@ int main(int argc, char* argv[]) {
 	double sum;
 	A->findMemory(sum);
 	std::cout << "Memory in GB: " << sum/8*pow(10,-9) << std::endl << std::endl;
-	std::cout << "CR: " << double(sum)/N/N << std::endl << std::endl;
+	std::cout << "CR: " << double(sum)/N/N << std::endl << std::endl; //compression rate
 	std::cout << "max rank: " << A->getMaxRank() << std::endl << std::endl;
 	std::cout << "relative forward error: " << err << std::endl << std::endl;
 
