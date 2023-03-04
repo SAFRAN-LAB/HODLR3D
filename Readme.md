@@ -1,3 +1,5 @@
+This library was created by Vaishnavi Gujjula, during the course of her Ph.D.
+
 "testHODLR3D.cpp" performs HODLR3D matrix vector product
 
 The matrix entries are to be defined in the function "getMatrixEntry(i,j)" of the kernel.hpp file.
