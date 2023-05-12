@@ -1,4 +1,4 @@
-This library was created by Vaishnavi Gujjula, during the course of her Ph.D.
+This library was created by Kandappan VA and Vaishnavi Gujjula, during the course of their Ph.D.
 
 "testHODLR3D.cpp" performs HODLR3D matrix vector product
 
