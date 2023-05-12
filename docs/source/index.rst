@@ -13,21 +13,21 @@ HODLR3D (Hierarchical Off Diagonal Low Rank 3D) is a new class of Hierarchical m
 
 It relies on the fact that certain off-diagonal blocks in the matrix can be well-approximated by low-rank matrices.
 
-Low-rank approximation of the appropriate blocks is obtained using ACA.
+The domain has been hierarchically partitioned using a uniform oct-tree.
 
-The domain has been hierachically partitioned using a uniform oct-tree.
+The low-rank approximation of the appropriate blocks is obtained using ACA.
 
 The code is written in C++ and features an easy-to-use interface, where the user provides the following inputs:
 
 - a ``kernel`` object which abstracts data of the matrix through a member function ``getMatrixEntry(int i, int j)`` which returns the entry at the :math:`i^{\mathrm{th}}` row and :math:`j^{\mathrm{th}}` column of the matrix.
 
-- locations of nodes in the domain through an Eigen matrix ``loc``
+- locations of nodes in the domain through a std::vector ``particles``
 
 - the vector ``b`` to be multiplied to the matrix
 
 The algorithm has been parallelized using OpenMP.
 
-Obtains :math:`A x` at a cost of :math:`\mathcal{O}\left(N\right)`
+Obtains :math:`A x` at a cost of :math:`\mathcal{O}\left(N\log(N)\right)`
 
 Doc Contents
 ============
@@ -42,7 +42,7 @@ Doc Contents
 Other Links
 ===========
 
-Learn more about :math:`\texttt{AFMM2Dlib}` by visiting the
+Learn more about :math:`\texttt{HODLR3Dlib}` by visiting the
 
 * Code Repository: http://github.com/sivaramambikasaran/AFMM2D
 * Documentation: http://afmm2d.rtfd.io
