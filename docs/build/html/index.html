@@ -72,16 +72,16 @@
 <p>HODLR3D (Hierarchical Off Diagonal Low Rank 3D) is a new class of Hierarchical matrix representation for matrices arising out of <cite>N</cite>-body problems in 3D.</p>
 <p><span class="math notranslate nohighlight">\(\texttt{HODLR3Dlib}\)</span> is a library to compute fast matrix-vector products using HODLR3D.</p>
 <p>It relies on the fact that certain off-diagonal blocks in the matrix can be well-approximated by low-rank matrices.</p>
-<p>Low-rank approximation of the appropriate blocks is obtained using ACA.</p>
-<p>The domain has been hierachically partitioned using a uniform oct-tree.</p>
+<p>The domain has been hierarchically partitioned using a uniform oct-tree.</p>
+<p>The low-rank approximation of the appropriate blocks is obtained using ACA.</p>
 <p>The code is written in C++ and features an easy-to-use interface, where the user provides the following inputs:</p>
 <ul class="simple">
 <li>a <code class="docutils literal notranslate"><span class="pre">kernel</span></code> object which abstracts data of the matrix through a member function <code class="docutils literal notranslate"><span class="pre">getMatrixEntry(int</span> <span class="pre">i,</span> <span class="pre">int</span> <span class="pre">j)</span></code> which returns the entry at the <span class="math notranslate nohighlight">\(i^{\mathrm{th}}\)</span> row and <span class="math notranslate nohighlight">\(j^{\mathrm{th}}\)</span> column of the matrix.</li>
-<li>locations of nodes in the domain through an Eigen matrix <code class="docutils literal notranslate"><span class="pre">loc</span></code></li>
+<li>locations of nodes in the domain through a std::vector <code class="docutils literal notranslate"><span class="pre">particles</span></code></li>
 <li>the vector <code class="docutils literal notranslate"><span class="pre">b</span></code> to be multiplied to the matrix</li>
 </ul>
 <p>The algorithm has been parallelized using OpenMP.</p>
-<p>Obtains <span class="math notranslate nohighlight">\(A x\)</span> at a cost of <span class="math notranslate nohighlight">\(\mathcal{O}\left(N\right)\)</span></p>
+<p>Obtains <span class="math notranslate nohighlight">\(A x\)</span> at a cost of <span class="math notranslate nohighlight">\(\mathcal{O}\left(N\log(N)\right)\)</span></p>
 </div>
 <div class="section" id="doc-contents">
 <h2>Doc Contents<a class="headerlink" href="#doc-contents" title="Permalink to this headline">¶</a></h2>
@@ -111,7 +111,7 @@
 </div>
 <div class="section" id="other-links">
 <h2>Other Links<a class="headerlink" href="#other-links" title="Permalink to this headline">¶</a></h2>
-<p>Learn more about <span class="math notranslate nohighlight">\(\texttt{AFMM2Dlib}\)</span> by visiting the</p>
+<p>Learn more about <span class="math notranslate nohighlight">\(\texttt{HODLR3Dlib}\)</span> by visiting the</p>
 <ul class="simple">
 <li>Code Repository: <a class="reference external" href="http://github.com/sivaramambikasaran/AFMM2D">http://github.com/sivaramambikasaran/AFMM2D</a></li>
 <li>Documentation: <a class="reference external" href="http://afmm2d.rtfd.io">http://afmm2d.rtfd.io</a></li>

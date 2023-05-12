@@ -131,8 +131,8 @@ int main(int argc, char* argv[]) {
 	    b(*it) = 1.0;
 	  }
 
-	Eigen::VectorXd AFMM_Ab;
-	H->MatVecProduct(b, AFMM_Ab);
+	Eigen::VectorXd Hb;
+	H->MatVecProduct(b, Hb);
 	timeHODLR3DRepres += H->A->assTime;
 	double timeMatVecProduct = H->A->matVecTime;
 
@@ -144,7 +144,7 @@ int main(int argc, char* argv[]) {
 	std::cout << std::endl << "Time taken to construct HODLR3D representation is: " << timeHODLR3DRepres << std::endl;
 	std::cout << std::endl << "Time taken to do Mat-Vec product is: " << timeMatVecProduct << std::endl << std::endl;
 
-	err = (true_Ab - AFMM_Ab).norm()/true_Ab.norm();
+	err = (true_Ab - Hb).norm()/true_Ab.norm();
 
 	double sum;
 	H->A->findMemory(sum);
