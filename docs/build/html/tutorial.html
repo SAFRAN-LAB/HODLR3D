@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutorial &mdash; HODLR3D 1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Benchmarks" href="benchmarks.html" />
+    <link rel="prev" title="Installation and Building" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> HODLR3D<img src="_static/HODLR3D_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation and Building</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setting-parameters-in-cmakelists-txt">Setting Parameters in CMakeLists.txt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-the-program">Running the program::</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-derived-class-of-kernel">Creating a Derived Class of <code class="docutils literal notranslate"><span class="pre">kernel</span></code>:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#defining-vector-b">Defining vector <code class="docutils literal notranslate"><span class="pre">b</span></code>:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-the-instance-of-afmm">Creating the Instance of <code class="docutils literal notranslate"><span class="pre">AFMM</span></code>:</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#assemble"><code class="docutils literal notranslate"><span class="pre">assemble</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mat-vec-product"><code class="docutils literal notranslate"><span class="pre">Mat-Vec</span> <span class="pre">product</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">HODLR3D</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Tutorial</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/tutorial.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="tutorial">
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<p>For the sake of this tutorial, we are going to be using the <code class="docutils literal notranslate"><span class="pre">tutorial.cpp</span></code> file that is listed under <code class="docutils literal notranslate"><span class="pre">examples/</span></code> since it demonstrates the features of this library. For the most part, comments in the file demonstrate intended functionality. However, we go over the main functions that may be of interest to a user on this page.</p>
+<p><strong>NOTE</strong>: It is assumed that you have already completed the installation process of getting the dependencies.</p>
+<div class="section" id="setting-parameters-in-cmakelists-txt">
+<h2>Setting Parameters in CMakeLists.txt<a class="headerlink" href="#setting-parameters-in-cmakelists-txt" title="Permalink to this headline">¶</a></h2>
+<p>There are some variables that need to be set by the user at the top of the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">INPUT_FILE</span></code>: This is the input <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> file that needs to be compiled. For this tutorial, it’s going to be set to <code class="docutils literal notranslate"><span class="pre">examples/tutorial.cpp</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">OUTPUT_EXECUTABLE</span></code>: This is the name that the final build executable is given. Here we are just going to set is as <code class="docutils literal notranslate"><span class="pre">tutorial</span></code>.</li>
+</ul>
+</div>
+<div class="section" id="running-the-program">
+<h2>Running the program::<a class="headerlink" href="#running-the-program" title="Permalink to this headline">¶</a></h2>
+<p>For this particular tutorial, the problem parameters are passed to the executable during runtime. We have the lines:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">N</span>                  <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="o">//</span> <span class="n">Size</span> <span class="n">of</span> <span class="n">the</span> <span class="n">Matrix</span> <span class="ow">in</span> <span class="n">consideration</span>
+<span class="n">MinParticlesInLeaf</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span> <span class="o">//</span> <span class="n">Minimum</span> <span class="n">particles</span> <span class="n">that</span> <span class="n">can</span> <span class="n">be</span> <span class="n">present</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">leaf</span> <span class="n">of</span> <span class="n">KD</span> <span class="n">tree</span>
+<span class="n">TOL_POW</span>            <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span> <span class="o">//</span> <span class="n">Tolerance</span> <span class="n">of</span> <span class="n">problem</span>
+</pre></div>
+</div>
+<p>This means that the first argument would be the matrix size considered, the second one would be the Minimum particles that can be present in a leaf of KD tree, and the final argument is approximately the number of digits of accuracy we want. For instance, running <code class="docutils literal notranslate"><span class="pre">./tutorial</span> <span class="pre">10000</span> <span class="pre">32</span> <span class="pre">12</span></code> would correspond to solving the problem with parameters <span class="math notranslate nohighlight">\(N=1000, MinParticlesInLeaf=32, \epsilon=10^{-12}\)</span>.</p>
+</div>
+<div class="section" id="creating-a-derived-class-of-kernel">
+<h2>Creating a Derived Class of <code class="docutils literal notranslate"><span class="pre">kernel</span></code>:<a class="headerlink" href="#creating-a-derived-class-of-kernel" title="Permalink to this headline">¶</a></h2>
+<p>The matrix that needs to be solved for is abstracted through this derived class of <code class="docutils literal notranslate"><span class="pre">kernel</span></code>. The main method that needs to be set for this class is <code class="docutils literal notranslate"><span class="pre">getMatrixEntry</span></code> which returns the entry at the <span class="math notranslate nohighlight">\(i^{\mathrm{th}}\)</span> row and <span class="math notranslate nohighlight">\(j^{\mathrm{th}}\)</span> column of the matrix. For instance, for the <span class="math notranslate nohighlight">\(1 / R\)</span> kernel, this would be set as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">userkernel</span><span class="p">:</span> <span class="n">public</span> <span class="n">kernel</span> <span class="p">{</span>
+
+<span class="n">public</span><span class="p">:</span>
+
+<span class="n">getMatrixEntry</span><span class="p">(</span><span class="n">const</span> <span class="n">unsigned</span> <span class="n">i</span><span class="p">,</span> <span class="n">const</span> <span class="n">unsigned</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+
+      <span class="n">pts2D</span> <span class="n">r1</span> <span class="o">=</span> <span class="n">particles_X</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+
+      <span class="n">pts2D</span> <span class="n">r2</span> <span class="o">=</span> <span class="n">particles_X</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+
+      <span class="n">double</span> <span class="n">R2</span>       <span class="o">=</span>       <span class="p">(</span><span class="n">r1</span><span class="o">.</span><span class="n">x</span><span class="o">-</span><span class="n">r2</span><span class="o">.</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">r1</span><span class="o">.</span><span class="n">x</span><span class="o">-</span><span class="n">r2</span><span class="o">.</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">r1</span><span class="o">.</span><span class="n">y</span><span class="o">-</span><span class="n">r2</span><span class="o">.</span><span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">r1</span><span class="o">.</span><span class="n">y</span><span class="o">-</span><span class="n">r2</span><span class="o">.</span><span class="n">y</span><span class="p">);</span>
+
+      <span class="n">double</span> <span class="n">R</span>        <span class="o">=</span>       <span class="n">sqrt</span><span class="p">(</span><span class="n">R2</span><span class="p">);</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="n">R</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+
+              <span class="k">return</span> <span class="n">R</span><span class="o">/</span><span class="n">a</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">else</span> <span class="p">{</span>
+              <span class="k">return</span> <span class="n">a</span><span class="o">/</span><span class="n">R</span><span class="p">;</span>
+      <span class="p">}</span>
+<span class="p">}</span>
+      <span class="o">~</span><span class="n">userkernel</span><span class="p">()</span> <span class="p">{};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>In this tutorial, we have initialized <code class="docutils literal notranslate"><span class="pre">loc</span></code>, a random set of points in <span class="math notranslate nohighlight">\((-1, 1)\)</span> which are then passed to the constructor of object <code class="docutils literal notranslate"><span class="pre">AFMM</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Eigen</span><span class="p">::</span><span class="n">MatrixXd</span> <span class="n">loc</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">Dimension</span><span class="p">);</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="n">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="n">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">Dimension</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="n">loc</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">)</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">double</span><span class="p">(</span><span class="n">rand</span><span class="p">())</span><span class="o">/</span><span class="n">double</span><span class="p">(</span><span class="n">RAND_MAX</span><span class="p">)</span><span class="o">-</span><span class="mf">1.0</span><span class="p">;</span> <span class="o">//</span> <span class="n">domain</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="defining-vector-b">
+<h2>Defining vector <code class="docutils literal notranslate"><span class="pre">b</span></code>:<a class="headerlink" href="#defining-vector-b" title="Permalink to this headline">¶</a></h2>
+<p>In this tutorial, we have defined <code class="docutils literal notranslate"><span class="pre">b</span></code>, the vector that is to be multiplied to the matrix, as a random set of points:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Eigen</span><span class="p">::</span><span class="n">VectorXd</span> <span class="n">b</span> <span class="o">=</span> <span class="n">Eigen</span><span class="p">::</span><span class="n">VectorXd</span><span class="p">::</span><span class="n">Random</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-the-instance-of-afmm">
+<h2>Creating the Instance of <code class="docutils literal notranslate"><span class="pre">AFMM</span></code>:<a class="headerlink" href="#creating-the-instance-of-afmm" title="Permalink to this headline">¶</a></h2>
+<p>The main operations of this library are carried out through the <code class="docutils literal notranslate"><span class="pre">AFMM</span></code> class. The parameters that are taken for the constructor are N, MinParticlesInLeaf, TOL_POW, loc:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AFMM</span><span class="o">*</span> <span class="n">afmm</span> <span class="o">=</span> <span class="n">new</span> <span class="n">AFMM</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">MinParticlesInLeaf</span><span class="p">,</span> <span class="n">TOL_POW</span><span class="p">,</span> <span class="n">loc</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We will now proceed to demonstrate the individual methods available under this class.</p>
+<div class="section" id="assemble">
+<h3><code class="docutils literal notranslate"><span class="pre">assemble</span></code><a class="headerlink" href="#assemble" title="Permalink to this headline">¶</a></h3>
+<p>Assemble the matrix in AFMM structure; i.e. it finds the low rank representation of the appropriate matrix sub-blocks:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">afmm</span><span class="o">-&gt;</span><span class="n">assemble</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mat-vec-product">
+<h3><code class="docutils literal notranslate"><span class="pre">Mat-Vec</span> <span class="pre">product</span></code><a class="headerlink" href="#mat-vec-product" title="Permalink to this headline">¶</a></h3>
+<p>Multiplies the matrix that is defined through object <code class="docutils literal notranslate"><span class="pre">userkernel</span></code> with the vector <code class="docutils literal notranslate"><span class="pre">b</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">outputVec</span> <span class="o">=</span> <span class="n">afmm</span><span class="o">-&gt;</span><span class="n">computeMatVecProduct</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation and Building" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="benchmarks.html" class="btn btn-neutral float-right" title="Benchmarks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, V A Kandappan, Vaishnavi Gujjula, Sivaram Ambiksaran.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

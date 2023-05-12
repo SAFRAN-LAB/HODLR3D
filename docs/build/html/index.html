@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to HODLR3D’s documentation! &mdash; HODLR3D 1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>Welcome to HODLR3Dlib’s Documentation! &mdash; HODLR3D 1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -12,9 +12,11 @@
         <script type="text/javascript" src="_static/jquery.js"></script>
         <script type="text/javascript" src="_static/underscore.js"></script>
         <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation and Building" href="installation.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -32,12 +34,13 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Welcome to HODLR3D’s documentation!</a></li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation and Building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarks</a></li>
 </ul>
-</div>
+
         </div>
       </div>
     </nav>
@@ -52,7 +55,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home"></a> &raquo;</li>
-      <li>Welcome to HODLR3D’s documentation!</li>
+      <li>Welcome to HODLR3Dlib’s Documentation!</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -62,24 +65,69 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="welcome-to-hodlr3d-s-documentation">
-<h1>Welcome to HODLR3D’s documentation!<a class="headerlink" href="#welcome-to-hodlr3d-s-documentation" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-</div>
-</div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="welcome-to-hodlr3dlib-s-documentation">
+<h1>Welcome to HODLR3Dlib’s Documentation!<a class="headerlink" href="#welcome-to-hodlr3dlib-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="about-texttt-hodlr3dlib">
+<h2>About <span class="math notranslate nohighlight">\(\texttt{HODLR3Dlib}\)</span>:<a class="headerlink" href="#about-texttt-hodlr3dlib" title="Permalink to this headline">¶</a></h2>
+<p>HODLR3D (Hierarchical Off Diagonal Low Rank 3D) is a new class of Hierarchical matrix representation for matrices arising out of <cite>N</cite>-body problems in 3D.</p>
+<p><span class="math notranslate nohighlight">\(\texttt{HODLR3Dlib}\)</span> is a library to compute fast matrix-vector products using HODLR3D.</p>
+<p>It relies on the fact that certain off-diagonal blocks in the matrix can be well-approximated by low-rank matrices.</p>
+<p>Low-rank approximation of the appropriate blocks is obtained using ACA.</p>
+<p>The domain has been hierachically partitioned using a uniform oct-tree.</p>
+<p>The code is written in C++ and features an easy-to-use interface, where the user provides the following inputs:</p>
 <ul class="simple">
-<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
-<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
-<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+<li>a <code class="docutils literal notranslate"><span class="pre">kernel</span></code> object which abstracts data of the matrix through a member function <code class="docutils literal notranslate"><span class="pre">getMatrixEntry(int</span> <span class="pre">i,</span> <span class="pre">int</span> <span class="pre">j)</span></code> which returns the entry at the <span class="math notranslate nohighlight">\(i^{\mathrm{th}}\)</span> row and <span class="math notranslate nohighlight">\(j^{\mathrm{th}}\)</span> column of the matrix.</li>
+<li>locations of nodes in the domain through an Eigen matrix <code class="docutils literal notranslate"><span class="pre">loc</span></code></li>
+<li>the vector <code class="docutils literal notranslate"><span class="pre">b</span></code> to be multiplied to the matrix</li>
 </ul>
+<p>The algorithm has been parallelized using OpenMP.</p>
+<p>Obtains <span class="math notranslate nohighlight">\(A x\)</span> at a cost of <span class="math notranslate nohighlight">\(\mathcal{O}\left(N\right)\)</span></p>
+</div>
+<div class="section" id="doc-contents">
+<h2>Doc Contents<a class="headerlink" href="#doc-contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation and Building</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#downloading-the-source">Downloading the Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#building-and-executing">Building and Executing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#setting-parameters-in-cmakelists-txt">Setting Parameters in CMakeLists.txt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#running-the-program">Running the program::</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#creating-a-derived-class-of-kernel">Creating a Derived Class of <code class="docutils literal notranslate"><span class="pre">kernel</span></code>:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#defining-vector-b">Defining vector <code class="docutils literal notranslate"><span class="pre">b</span></code>:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#creating-the-instance-of-afmm">Creating the Instance of <code class="docutils literal notranslate"><span class="pre">AFMM</span></code>:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="benchmarks.html#time-taken-vs-tolerance">Time Taken vs Tolerance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="benchmarks.html#time-taken-vs-size-of-matrix">Time Taken vs Size of Matrix</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="other-links">
+<h2>Other Links<a class="headerlink" href="#other-links" title="Permalink to this headline">¶</a></h2>
+<p>Learn more about <span class="math notranslate nohighlight">\(\texttt{AFMM2Dlib}\)</span> by visiting the</p>
+<ul class="simple">
+<li>Code Repository: <a class="reference external" href="http://github.com/sivaramambikasaran/AFMM2D">http://github.com/sivaramambikasaran/AFMM2D</a></li>
+<li>Documentation: <a class="reference external" href="http://afmm2d.rtfd.io">http://afmm2d.rtfd.io</a></li>
+</ul>
+</div>
 </div>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation and Building" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

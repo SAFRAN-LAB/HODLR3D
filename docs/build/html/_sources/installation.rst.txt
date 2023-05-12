@@ -1,0 +1,48 @@
+*************************
+Installation and Building
+*************************
+
+Downloading the Source
+-----------------------
+
+:math:`\texttt{HODLR3Dlib}` is distributed using the git version control system, and is hosted on Github. The repository can be cloned using::
+
+    git clone https://github.com/SAFRAN-LAB/HODLR3D.git --recursive
+
+The ``--recursive`` flag is an argument to ensure that all submodules are also checked out.
+
+Dependencies
+-------------
+
+- Eigen Linear Algebra Library (get it `here <https://eigen.tuxfamily.org/index.php?title=Main_Page>`_)
+- (optional) An OpenMP enabled compiler (e.g. gcc4.2 or above) is required to use shared-memory parallelism.
+
+**NOTE**: On MacOS, the default compiler is `clang` which doesn't have OpenMP support. You will have to use g++ to make use of the speedups from OpenMP::
+
+    user@computer HODLR3D$ brew install g++-10
+    user@computer HODLR3D$ export CXX=g++
+
+Installation
+-------------
+
+Then, set the environment variable ``EIGEN_PATH`` to the location of your Eigen installation.::
+
+    user@computer HODLR3D$ export EIGEN_PATH=path/to/eigen/
+
+Testing
+-------
+
+Key in the ``testHODLR3D.cpp`` to be used as input under ``SOURCES`` in ``HODLR3D/Makefile.mk``. Here you also set the name of the output executable under ``EXECUTABLE``. Then perform a make clean to remove all the previously generated executables run the ``Makefile``. Further, to get your executable run the make file. Finally run the executable with the necessary run-time inputs::
+
+    user@computer HODLR3D$ make -f Makefile.mk clean
+    user@computer HODLR3D$ make -f Makefile.mk
+    user@computer HODLR3D$ ./testHODLR3D
+
+Building and Executing
+----------------------
+
+Key in the required ``.cpp`` to be used as input under ``SOURCES`` in ``HODLR3Dlib/Makefile.mk``. Here you also set the name of the output executable under ``EXECUTABLE``. Then perform a make clean to remove all the previously generated executables run the ``Makefile``. Further, to get your executable run the make file. Finally run the executable with the necessary run-time inputs::
+
+    user@computer HODLR3D$ make -f Makefile.mk clean
+    user@computer HODLR3D$ make -f Makefile.mk
+    user@computer HODLR3D$ ./executable
