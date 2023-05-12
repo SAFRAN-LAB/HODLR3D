@@ -11,9 +11,9 @@
 		}
 	}
 
-HODLR3DTree::HODLR3DTree(userkernel* K, int cubeRootN, int nLevels, int nParticlesInLeafAlong1D, double L, int TOL_POW) {
+HODLR3DTree::HODLR3DTree(userkernel* K, int N, int nLevels, int nParticlesInLeafAlong1D, double L, int TOL_POW) {
 		this->K					=	K;
-		this->cubeRootN	=	cubeRootN;
+		this->N	=	N;
 		this->nLevels		=	nLevels;
 		this->L					=	L;
     this->nParticlesInLeafAlong1D = nParticlesInLeafAlong1D;
@@ -27,44 +27,43 @@ HODLR3DTree::HODLR3DTree(userkernel* K, int cubeRootN, int nLevels, int nParticl
 		}
 		this->smallestBoxSize	=	boxRadius[nLevels];
 		K->a					=	smallestBoxSize;
-		this->N					=	cubeRootN*cubeRootN*cubeRootN;
 		this->assTime = 0.0;
 		this->matVecTime = 0.0;
 	}
 
-  void HODLR3DTree::set_Standard_Cheb_Nodes() {
-		for (int k=0; k<nParticlesInLeafAlong1D; ++k) {
-			Nodes1D.push_back(-cos((k+0.5)/nParticlesInLeafAlong1D*PI));
-		}
-		pts3D temp1;
-		for (int j=0; j<nParticlesInLeafAlong1D; ++j) {
-			for (int k=0; k<nParticlesInLeafAlong1D; ++k) {
-				for (int i=0; i<nParticlesInLeafAlong1D; ++i) {
-					temp1.x	=	Nodes1D[k];
-					temp1.y	=	Nodes1D[j];
-					temp1.z	=	Nodes1D[i];
-					Nodes.push_back(temp1);
-				}
-			}
-		}
-	}
+  // void HODLR3DTree::set_Standard_Cheb_Nodes() {
+	// 	for (int k=0; k<nParticlesInLeafAlong1D; ++k) {
+	// 		Nodes1D.push_back(-cos((k+0.5)/nParticlesInLeafAlong1D*PI));
+	// 	}
+	// 	pts3D temp1;
+	// 	for (int j=0; j<nParticlesInLeafAlong1D; ++j) {
+	// 		for (int k=0; k<nParticlesInLeafAlong1D; ++k) {
+	// 			for (int i=0; i<nParticlesInLeafAlong1D; ++i) {
+	// 				temp1.x	=	Nodes1D[k];
+	// 				temp1.y	=	Nodes1D[j];
+	// 				temp1.z	=	Nodes1D[i];
+	// 				Nodes.push_back(temp1);
+	// 			}
+	// 		}
+	// 	}
+	// }
 
-	void HODLR3DTree::set_Uniform_Nodes() {
-		for (int k=0; k<cubeRootN; ++k) {
-			Nodes1D.push_back(-L+2.0*L*(k+1.0)/(cubeRootN+1.0));
-		}
-		pts3D temp1;
-		for (int j=0; j<cubeRootN; ++j) {
-			for (int k=0; k<cubeRootN; ++k) {
-				for (int i=0; i<cubeRootN; ++i) {
-					temp1.x	=	Nodes1D[k];
-					temp1.y	=	Nodes1D[j];
-					temp1.z	=	Nodes1D[i];
-					K->particles.push_back(temp1);
-				}
-			}
-		}
-	}
+	// void HODLR3DTree::set_Uniform_Nodes() {
+	// 	for (int k=0; k<cubeRootN; ++k) {
+	// 		Nodes1D.push_back(-L+2.0*L*(k+1.0)/(cubeRootN+1.0));
+	// 	}
+	// 	pts3D temp1;
+	// 	for (int j=0; j<cubeRootN; ++j) {
+	// 		for (int k=0; k<cubeRootN; ++k) {
+	// 			for (int i=0; i<cubeRootN; ++i) {
+	// 				temp1.x	=	Nodes1D[k];
+	// 				temp1.y	=	Nodes1D[j];
+	// 				temp1.z	=	Nodes1D[i];
+	// 				K->particles.push_back(temp1);
+	// 			}
+	// 		}
+	// 	}
+	// }
 
   void HODLR3DTree::shift_Nodes(double radius, pts3D center, std::vector<pts3D> &particle_loc) {
     for (size_t i = 0; i < Nodes.size(); i++) {

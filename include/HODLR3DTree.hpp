@@ -46,11 +46,11 @@ public:
 	double assTime, matVecTime;
 
 // public:
-HODLR3DTree(userkernel* K, int cubeRootN, int nLevels, int nParticlesInLeafAlong1D, double L, int TOL_POW);
+HODLR3DTree(userkernel* K, int N, int nLevels, int nParticlesInLeafAlong1D, double L, int TOL_POW);
 
-  void set_Standard_Cheb_Nodes();
+  // void set_Standard_Cheb_Nodes();
 
-	void set_Uniform_Nodes();
+	// void set_Uniform_Nodes();
 
   void shift_Nodes(double radius, pts3D center, std::vector<pts3D> &particle_loc);
 

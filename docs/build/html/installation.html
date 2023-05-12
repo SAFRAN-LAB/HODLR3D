@@ -40,7 +40,10 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation and Building</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#downloading-the-source">Downloading the Source</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#manually-installing">Manually Installing</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#building-and-executing">Building and Executing</a></li>
 </ul>
@@ -81,7 +84,7 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">SAFRAN</span><span class="o">-</span><span class="n">LAB</span><span class="o">/</span><span class="n">HODLR3D</span><span class="o">.</span><span class="n">git</span> <span class="o">--</span><span class="n">recursive</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">--recursive</span></code> flag is an argument to ensure that all submodules are also checked out.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--recursive</span></code> flag is argument to ensure that all submodules are also checked out.</p>
 </div>
 <div class="section" id="dependencies">
 <h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
@@ -97,26 +100,33 @@ user@computer HODLR3D$ export CXX=g++
 </div>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>Then, set the environment variable <code class="docutils literal notranslate"><span class="pre">EIGEN_PATH</span></code> to the location of your Eigen installation.:</p>
+<div class="section" id="manually-installing">
+<h3>Manually Installing<a class="headerlink" href="#manually-installing" title="Permalink to this headline">¶</a></h3>
+<p>Then, set the environment variable <code class="docutils literal notranslate"><span class="pre">EIGEN_PATH</span></code> to the location of your Eigen installation. This is needed by the CMake script.:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>user@computer HODLR3D$ export EIGEN_PATH=path/to/eigen/
 </pre></div>
 </div>
 </div>
+</div>
 <div class="section" id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
-<p>Key in the <code class="docutils literal notranslate"><span class="pre">testHODLR3D.cpp</span></code> to be used as input under <code class="docutils literal notranslate"><span class="pre">SOURCES</span></code> in <code class="docutils literal notranslate"><span class="pre">HODLR3D/Makefile.mk</span></code>. Here you also set the name of the output executable under <code class="docutils literal notranslate"><span class="pre">EXECUTABLE</span></code>. Then perform a make clean to remove all the previously generated executables run the <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>. Further, to get your executable run the make file. Finally run the executable with the necessary run-time inputs:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>user@computer HODLR3D$ make -f Makefile.mk clean
-user@computer HODLR3D$ make -f Makefile.mk
-user@computer HODLR3D$ ./testHODLR3D
+<p>Now, we need to ensure that all the functions of the libraries function as intended. For this purpose, we will be running the script <code class="docutils literal notranslate"><span class="pre">examples/testHODLR3D.cpp</span></code>.
+Key in the file <code class="docutils literal notranslate"><span class="pre">`examples/testHODLR3D.cpp</span></code> as input under <code class="docutils literal notranslate"><span class="pre">INPUT_FILE</span></code> in <code class="docutils literal notranslate"><span class="pre">HODLR3Dlib/CMakeLists.txt</span></code>. Here you also set the name of the output executable, say <code class="docutils literal notranslate"><span class="pre">testHODLR3D</span></code>, under <code class="docutils literal notranslate"><span class="pre">OUTPUT_EXECUTABLE_NAME</span></code>.
+Then create a directory called <code class="docutils literal notranslate"><span class="pre">build</span></code> and navigate to your build directory and run <code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">path/to/CMakeLists.txt</span></code> and run the generated <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> to get your executable.
+To check this on your computer, run the following lines:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>user@computer HODLR3D$ mkdir build &amp;&amp; cd build
+user@computer build$ cmake ..
+user@computer build$ make
+user@computer build$ ./testHODLR3D
 </pre></div>
 </div>
 </div>
 <div class="section" id="building-and-executing">
 <h2>Building and Executing<a class="headerlink" href="#building-and-executing" title="Permalink to this headline">¶</a></h2>
-<p>Key in the required <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> to be used as input under <code class="docutils literal notranslate"><span class="pre">SOURCES</span></code> in <code class="docutils literal notranslate"><span class="pre">HODLR3Dlib/Makefile.mk</span></code>. Here you also set the name of the output executable under <code class="docutils literal notranslate"><span class="pre">EXECUTABLE</span></code>. Then perform a make clean to remove all the previously generated executables run the <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>. Further, to get your executable run the make file. Finally run the executable with the necessary run-time inputs:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>user@computer HODLR3D$ make -f Makefile.mk clean
-user@computer HODLR3D$ make -f Makefile.mk
-user@computer HODLR3D$ ./executable
+<p>Key in the required <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> to be used as input under <code class="docutils literal notranslate"><span class="pre">INPUT_FILE</span></code> in <code class="docutils literal notranslate"><span class="pre">HODLR3Dlib/CMakeLists.txt</span></code>. Here you also set the name of the output executable under <code class="docutils literal notranslate"><span class="pre">OUTPUT_EXECUTABLE_NAME</span></code>. Then navigate to your build directory and run <code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">path/to/CMakeLists.txt</span></code> and run the generated <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> to get your executable:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>user@computer build$ cmake path/to/HODLR3D/
+user@computer build$ make -j n_threads
+user@computer build$ ./executable
 </pre></div>
 </div>
 </div>

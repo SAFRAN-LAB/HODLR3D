@@ -16,7 +16,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Installation and Building" href="installation.html" /> 
+    <link rel="prev" title="Tutorial" href="tutorial.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -37,11 +37,8 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation and Building</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Benchmarks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#time-taken-vs-tolerance">Time Taken vs Tolerance</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#time-taken-vs-size-of-matrix">Time Taken vs Size of Matrix</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Benchmarks</a></li>
 </ul>
 
         </div>
@@ -70,104 +67,25 @@
              
   <div class="section" id="benchmarks">
 <h1>Benchmarks<a class="headerlink" href="#benchmarks" title="Permalink to this headline">¶</a></h1>
-<p>All the following benchmarks have been carried out on a 2.3 GHz Intel Core i5 processor with 8GB RAM (with OpenMP enabled, this is 4 threads), with g++-9 compiler and Eigen version 3.3.7. The compiler flags that were utilized are the same are those mentioned in the CMakeLists.txt file.</p>
-<div class="section" id="time-taken-vs-tolerance">
-<h2>Time Taken vs Tolerance<a class="headerlink" href="#time-taken-vs-tolerance" title="Permalink to this headline">¶</a></h2>
-<p>These benchmarks were performed for size of the matrix <span class="math notranslate nohighlight">\(N = 1000000\)</span>, with the size of the leaf node set to <span class="math notranslate nohighlight">\(M = 100\)</span>.</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="43%" />
-<col width="32%" />
-<col width="24%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Tolerance</th>
-<th class="head">Assembly(s)</th>
-<th class="head">MatVec(s)</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td><span class="math notranslate nohighlight">\(10^{-2}\)</span></td>
-<td>19.8358</td>
-<td>9.65095</td>
-</tr>
-<tr class="row-odd"><td><span class="math notranslate nohighlight">\(10^{-4}\)</span></td>
-<td>49.7557</td>
-<td>8.55117</td>
-</tr>
-<tr class="row-even"><td><span class="math notranslate nohighlight">\(10^{-6}\)</span></td>
-<td>70.4369</td>
-<td>8.57725</td>
-</tr>
-<tr class="row-odd"><td><span class="math notranslate nohighlight">\(10^{-8}\)</span></td>
-<td>126.125</td>
-<td>12.9264</td>
-</tr>
-<tr class="row-even"><td><span class="math notranslate nohighlight">\(10^{-10}\)</span></td>
-<td>214.757</td>
-<td>52.5742</td>
-</tr>
-<tr class="row-odd"><td><span class="math notranslate nohighlight">\(10^{-12}\)</span></td>
-<td>419.34</td>
-<td>47.0097</td>
-</tr>
-<tr class="row-even"><td><span class="math notranslate nohighlight">\(10^{-14}\)</span></td>
-<td>749.672</td>
-<td>79.0786</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="time-taken-vs-size-of-matrix">
-<h2>Time Taken vs Size of Matrix<a class="headerlink" href="#time-taken-vs-size-of-matrix" title="Permalink to this headline">¶</a></h2>
-<p>For these benchmarks, the leaf size was fixed at <span class="math notranslate nohighlight">\(M = 100\)</span>, with tolerance set to <span class="math notranslate nohighlight">\(10^{-12}\)</span></p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="49%" />
-<col width="26%" />
-<col width="26%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head"><span class="math notranslate nohighlight">\(N\)</span></th>
-<th class="head">Assembly(s)</th>
-<th class="head">MatVec(s)</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td><span class="math notranslate nohighlight">\(5 \times 10^{3}\)</span></td>
-<td>0.309096</td>
-<td>0.040681</td>
-</tr>
-<tr class="row-odd"><td><span class="math notranslate nohighlight">\(10^{4}\)</span></td>
-<td>1.88374</td>
-<td>0.062273</td>
-</tr>
-<tr class="row-even"><td><span class="math notranslate nohighlight">\(5 \times 10^{4}\)</span></td>
-<td>14.2385</td>
-<td>0.47138</td>
-</tr>
-<tr class="row-odd"><td><span class="math notranslate nohighlight">\(10^{5}\)</span></td>
-<td>29.3395</td>
-<td>1.20935</td>
-</tr>
-<tr class="row-even"><td><span class="math notranslate nohighlight">\(5 \times 10^{5}\)</span></td>
-<td>244.375</td>
-<td>42.0531</td>
-</tr>
-<tr class="row-odd"><td><span class="math notranslate nohighlight">\(10^{6}\)</span></td>
-<td>419.34</td>
-<td>47.0097</td>
-</tr>
-</tbody>
-</table>
-</div>
+<p>The run-time inputs are set as follows</p>
+<ol class="arabic simple">
+<li>cubeRootN    is varied to record the assemble/initialization time, matrix-vector product time and the realtive forward error in the solution.</li>
+<li>nParticlesInLeafAlong1D      is set to 6</li>
+<li>L    is set to 1</li>
+<li>TOL_POW is set to 7</li>
+<li>Qchoice is set to 7</li>
+</ol>
+<p>All the following benchmarks have been recorded by running the code on an Intel Xeon Gold 2.5GHz processor with 8 OpenMP threads. The compiler flags that were utilized are the same are those mentioned in the CMakeLists.txt file.</p>
+<a class="reference internal image-reference" href="_images/assembleTime.png"><img alt="_images/assembleTime.png" src="_images/assembleTime.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/matvecTime.png"><img alt="_images/matvecTime.png" src="_images/matvecTime.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/error.png"><img alt="_images/error.png" src="_images/error.png" style="width: 600px;" /></a>
 </div>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="installation.html" class="btn btn-neutral float-left" title="Installation and Building" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tutorial.html" class="btn btn-neutral float-left" title="Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

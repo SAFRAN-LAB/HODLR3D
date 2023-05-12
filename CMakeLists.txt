@@ -14,7 +14,7 @@ endif()
 # Here set the name for the output executable:
 # This can also be passed as a command line argument:
 if(NOT OUTPUT_EXECUTABLE)
-    set (OUTPUT_EXECUTABLE "exec1")
+    set (OUTPUT_EXECUTABLE "testHODLR3D")
 endif()
 # Change this accordingly to point to the Eigen root folder
 # By default, it will pick up the environment variable EIGEN_PATH

@@ -12,6 +12,24 @@
 #include "HODLR3DTree.hpp"
 #include "HODLR3D.hpp"
 
+void set_Uniform_Nodes(int cubeRootN, double L, std::vector<pts3D>& particles) {
+	std::vector<double> Nodes1D;
+	for (int k=0; k<cubeRootN; ++k) {
+		Nodes1D.push_back(-L+2.0*L*(k+1.0)/(cubeRootN+1.0));
+	}
+	pts3D temp1;
+	for (int j=0; j<cubeRootN; ++j) {
+		for (int k=0; k<cubeRootN; ++k) {
+			for (int i=0; i<cubeRootN; ++i) {
+				temp1.x	=	Nodes1D[k];
+				temp1.y	=	Nodes1D[j];
+				temp1.z	=	Nodes1D[i];
+				particles.push_back(temp1);
+			}
+		}
+	}
+}
+
 double userkernel::getMatrixEntry(const unsigned i, const unsigned j) {
 	if (i==j) {
 		return 0.0;
@@ -73,12 +91,16 @@ int main(int argc, char* argv[]) {
 		Qchoice = atoi(argv[5]);
 	}
 	double start, end;
+
 	int nLevels		=	ceil(3*log(double(cubeRootN)/nParticlesInLeafAlong1D)/log(8));
 	std::cout << "nLevels: " << nLevels << std::endl;
 
+	// Defining particles at the tensor product grid of uniformly distributed pow(cubeRootN,3) number of particles in [-L,L]^3.
+	std::vector<pts3D> particles;
+	set_Uniform_Nodes(cubeRootN, L, particles);
 	/////////////////////////////////////////////////////////////////////////
 	start	=	omp_get_wtime();
-	HODLR3D *H = new HODLR3D(cubeRootN, nParticlesInLeafAlong1D, L, TOL_POW, Qchoice);
+	HODLR3D *H = new HODLR3D(nParticlesInLeafAlong1D, L, TOL_POW, Qchoice, particles);
 	end		=	omp_get_wtime();
 	double timeCreateTree	=	(end-start);
 
@@ -87,7 +109,7 @@ int main(int argc, char* argv[]) {
 	std::cout << std::endl << "Time taken to create the tree is: " << timeCreateTree << std::endl;
 	/////////////////////////////////////////////////////////////////////////
 	start	=	omp_get_wtime();
-	H->factorize();
+	H->assemble();
 	end		=	omp_get_wtime();
 
 	double timeHODLR3DRepres =	(end-start);

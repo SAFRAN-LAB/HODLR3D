@@ -42,10 +42,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#setting-parameters-in-cmakelists-txt">Setting Parameters in CMakeLists.txt</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#running-the-program">Running the program::</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#creating-a-derived-class-of-kernel">Creating a Derived Class of <code class="docutils literal notranslate"><span class="pre">kernel</span></code>:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#defining-location-of-particles">Defining location of particles:</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#defining-vector-b">Defining vector <code class="docutils literal notranslate"><span class="pre">b</span></code>:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#creating-the-instance-of-afmm">Creating the Instance of <code class="docutils literal notranslate"><span class="pre">AFMM</span></code>:</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creating-the-instance-of-hodlr3d">Creating the Instance of <code class="docutils literal notranslate"><span class="pre">HODLR3D</span></code>:</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#assemble"><code class="docutils literal notranslate"><span class="pre">assemble</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#mat-vec-product"><code class="docutils literal notranslate"><span class="pre">Mat-Vec</span> <span class="pre">product</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matvecproduct"><code class="docutils literal notranslate"><span class="pre">MatVecProduct</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -79,93 +80,141 @@
              
   <div class="section" id="tutorial">
 <h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
-<p>For the sake of this tutorial, we are going to be using the <code class="docutils literal notranslate"><span class="pre">tutorial.cpp</span></code> file that is listed under <code class="docutils literal notranslate"><span class="pre">examples/</span></code> since it demonstrates the features of this library. For the most part, comments in the file demonstrate intended functionality. However, we go over the main functions that may be of interest to a user on this page.</p>
+<p>For the sake of this tutorial, we are going to be using the <code class="docutils literal notranslate"><span class="pre">testHODLR3D.cpp</span></code> file that is listed under <code class="docutils literal notranslate"><span class="pre">examples/</span></code> since it demonstrates the features of this library. For the most part, comments in the file demonstrate intended functionality. However, we go over the main functions that may be of interest to a user on this page.</p>
 <p><strong>NOTE</strong>: It is assumed that you have already completed the installation process of getting the dependencies.</p>
 <div class="section" id="setting-parameters-in-cmakelists-txt">
 <h2>Setting Parameters in CMakeLists.txt<a class="headerlink" href="#setting-parameters-in-cmakelists-txt" title="Permalink to this headline">¶</a></h2>
 <p>There are some variables that need to be set by the user at the top of the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">INPUT_FILE</span></code>: This is the input <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> file that needs to be compiled. For this tutorial, it’s going to be set to <code class="docutils literal notranslate"><span class="pre">examples/tutorial.cpp</span></code>.</li>
-<li><code class="docutils literal notranslate"><span class="pre">OUTPUT_EXECUTABLE</span></code>: This is the name that the final build executable is given. Here we are just going to set is as <code class="docutils literal notranslate"><span class="pre">tutorial</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">INPUT_FILE</span></code>: This is the input <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> file that needs to be compiled. For this tutorial, it’s going to be set to <code class="docutils literal notranslate"><span class="pre">examples/testHODLR3D.cpp</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">OUTPUT_EXECUTABLE</span></code>: This is the name that the final build executable is given. Here we are just going to set is as <code class="docutils literal notranslate"><span class="pre">testHODLR3D</span></code>.</li>
 </ul>
 </div>
 <div class="section" id="running-the-program">
 <h2>Running the program::<a class="headerlink" href="#running-the-program" title="Permalink to this headline">¶</a></h2>
 <p>For this particular tutorial, the problem parameters are passed to the executable during runtime. We have the lines:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">N</span>                  <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="o">//</span> <span class="n">Size</span> <span class="n">of</span> <span class="n">the</span> <span class="n">Matrix</span> <span class="ow">in</span> <span class="n">consideration</span>
-<span class="n">MinParticlesInLeaf</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span> <span class="o">//</span> <span class="n">Minimum</span> <span class="n">particles</span> <span class="n">that</span> <span class="n">can</span> <span class="n">be</span> <span class="n">present</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">leaf</span> <span class="n">of</span> <span class="n">KD</span> <span class="n">tree</span>
-<span class="n">TOL_POW</span>            <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span> <span class="o">//</span> <span class="n">Tolerance</span> <span class="n">of</span> <span class="n">problem</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cubeRootN</span>                         <span class="o">=</span>   <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+      <span class="n">nParticlesInLeafAlong1D</span> <span class="o">=</span>       <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+      <span class="n">L</span>                                       <span class="o">=</span>       <span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+      <span class="n">TOL_POW</span>                 <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
+      <span class="n">Qchoice</span>                 <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]);</span>
 </pre></div>
 </div>
-<p>This means that the first argument would be the matrix size considered, the second one would be the Minimum particles that can be present in a leaf of KD tree, and the final argument is approximately the number of digits of accuracy we want. For instance, running <code class="docutils literal notranslate"><span class="pre">./tutorial</span> <span class="pre">10000</span> <span class="pre">32</span> <span class="pre">12</span></code> would correspond to solving the problem with parameters <span class="math notranslate nohighlight">\(N=1000, MinParticlesInLeaf=32, \epsilon=10^{-12}\)</span>.</p>
+<p>Each of the above are described below</p>
+<ol class="arabic simple">
+<li>cubeRootN = pow(N,1/3) where N is the system size. In this tutorial, the code takes N to be perfect cubes</li>
+<li>nParticlesInLeafAlong1D is a parameter that controls the maximum leaf size, where leaf size=pow(nParticlesInLeafAlong1D,3)</li>
+<li>L is the half side length of square cube, which is the computational domain</li>
+<li>TOL_POW = -log(tolerance for the ACA routine), which is approximately the number of digits of accuracy we want.</li>
+<li>Qchoice is the choice of kernel function to be used from among those defined in function getMatrixEntry of userkernel class.</li>
+</ol>
+<p>For instance, running <code class="docutils literal notranslate"><span class="pre">./testHODLR3D</span> <span class="pre">40</span> <span class="pre">8</span> <span class="pre">1.0</span> <span class="pre">6</span> <span class="pre">7</span></code> would correspond to solving the problem with parameters :cubeRootN=40, nParticlesInLeafAlong1D=8, L=1.0, TOL_POW=6, Qchoice=7.</p>
 </div>
 <div class="section" id="creating-a-derived-class-of-kernel">
 <h2>Creating a Derived Class of <code class="docutils literal notranslate"><span class="pre">kernel</span></code>:<a class="headerlink" href="#creating-a-derived-class-of-kernel" title="Permalink to this headline">¶</a></h2>
-<p>The matrix that needs to be solved for is abstracted through this derived class of <code class="docutils literal notranslate"><span class="pre">kernel</span></code>. The main method that needs to be set for this class is <code class="docutils literal notranslate"><span class="pre">getMatrixEntry</span></code> which returns the entry at the <span class="math notranslate nohighlight">\(i^{\mathrm{th}}\)</span> row and <span class="math notranslate nohighlight">\(j^{\mathrm{th}}\)</span> column of the matrix. For instance, for the <span class="math notranslate nohighlight">\(1 / R\)</span> kernel, this would be set as:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">userkernel</span><span class="p">:</span> <span class="n">public</span> <span class="n">kernel</span> <span class="p">{</span>
-
-<span class="n">public</span><span class="p">:</span>
-
-<span class="n">getMatrixEntry</span><span class="p">(</span><span class="n">const</span> <span class="n">unsigned</span> <span class="n">i</span><span class="p">,</span> <span class="n">const</span> <span class="n">unsigned</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
-
-      <span class="n">pts2D</span> <span class="n">r1</span> <span class="o">=</span> <span class="n">particles_X</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-
-      <span class="n">pts2D</span> <span class="n">r2</span> <span class="o">=</span> <span class="n">particles_X</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
-
-      <span class="n">double</span> <span class="n">R2</span>       <span class="o">=</span>       <span class="p">(</span><span class="n">r1</span><span class="o">.</span><span class="n">x</span><span class="o">-</span><span class="n">r2</span><span class="o">.</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">r1</span><span class="o">.</span><span class="n">x</span><span class="o">-</span><span class="n">r2</span><span class="o">.</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">r1</span><span class="o">.</span><span class="n">y</span><span class="o">-</span><span class="n">r2</span><span class="o">.</span><span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">r1</span><span class="o">.</span><span class="n">y</span><span class="o">-</span><span class="n">r2</span><span class="o">.</span><span class="n">y</span><span class="p">);</span>
-
-      <span class="n">double</span> <span class="n">R</span>        <span class="o">=</span>       <span class="n">sqrt</span><span class="p">(</span><span class="n">R2</span><span class="p">);</span>
-
-      <span class="k">if</span> <span class="p">(</span><span class="n">R</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
-
-              <span class="k">return</span> <span class="n">R</span><span class="o">/</span><span class="n">a</span><span class="p">;</span>
-      <span class="p">}</span>
-      <span class="k">else</span> <span class="p">{</span>
-              <span class="k">return</span> <span class="n">a</span><span class="o">/</span><span class="n">R</span><span class="p">;</span>
-      <span class="p">}</span>
-<span class="p">}</span>
-      <span class="o">~</span><span class="n">userkernel</span><span class="p">()</span> <span class="p">{};</span>
-<span class="p">};</span>
+<p>The matrix that needs to be solved for is abstracted through this derived class of <code class="docutils literal notranslate"><span class="pre">kernel</span></code>. The main method that needs to be set for this class is <code class="docutils literal notranslate"><span class="pre">getMatrixEntry</span></code> which returns the entry at the <span class="math notranslate nohighlight">\(i^{\mathrm{th}}\)</span> row and <span class="math notranslate nohighlight">\(j^{\mathrm{th}}\)</span> column of the matrix. Many kernel functions are defined, choose the that is needed using the Qchoice parameter at run-time. If a kernel function that is not already defined, one can define it at this function <code class="docutils literal notranslate"><span class="pre">getMatrixEntry</span></code>. The <code class="docutils literal notranslate"><span class="pre">getMatrixEntry</span></code> is defined as follows in the <code class="docutils literal notranslate"><span class="pre">testHODLR3D.cpp</span></code> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">double</span> <span class="n">userkernel</span><span class="p">::</span><span class="n">getMatrixEntry</span><span class="p">(</span><span class="n">const</span> <span class="n">unsigned</span> <span class="n">i</span><span class="p">,</span> <span class="n">const</span> <span class="n">unsigned</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+       <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+              <span class="k">return</span> <span class="mf">0.0</span><span class="p">;</span>
+       <span class="p">}</span>
+       <span class="k">else</span> <span class="p">{</span>
+              <span class="k">if</span> <span class="p">(</span><span class="n">Qchoice</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+                      <span class="k">return</span> <span class="n">RBF_Logarithm</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+              <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">Qchoice</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+                      <span class="k">return</span> <span class="n">RBF_Exponential</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+              <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">Qchoice</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+                      <span class="k">return</span> <span class="n">RBF_Inverse_Quadric</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+              <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">Qchoice</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
+                      <span class="k">return</span> <span class="n">RBF_Quadric</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+              <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">Qchoice</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span>
+                      <span class="k">return</span> <span class="n">RBF_Inverse_Multi_Quadric</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+              <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">Qchoice</span> <span class="o">==</span> <span class="mi">5</span><span class="p">)</span>
+                      <span class="k">return</span> <span class="n">RBF_Gaussian</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+              <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">Qchoice</span> <span class="o">==</span> <span class="mi">6</span><span class="p">)</span>
+                      <span class="k">return</span> <span class="n">RBF_Multi_quadric</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+              <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">Qchoice</span> <span class="o">==</span> <span class="mi">7</span><span class="p">)</span>
+                      <span class="k">return</span> <span class="n">Laplacian_3D</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+              <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">Qchoice</span> <span class="o">==</span> <span class="mi">8</span><span class="p">)</span>
+                      <span class="k">return</span> <span class="n">oneOverR4</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+              <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">Qchoice</span> <span class="o">==</span> <span class="mi">9</span><span class="p">)</span>
+                      <span class="k">return</span> <span class="n">Laplacian_2D</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+              <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">Qchoice</span> <span class="o">==</span> <span class="mi">10</span><span class="p">)</span>
+                      <span class="k">return</span> <span class="n">RBF_spline</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+              <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">Qchoice</span> <span class="o">==</span> <span class="mi">11</span><span class="p">)</span>
+                      <span class="k">return</span> <span class="n">kernel_besselJ</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+              <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">Qchoice</span> <span class="o">==</span> <span class="mi">12</span><span class="p">)</span>
+                      <span class="k">return</span> <span class="n">kernel_besselY</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+              <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">Qchoice</span> <span class="o">==</span> <span class="mi">13</span><span class="p">)</span>
+                      <span class="k">return</span> <span class="n">Helmholtz_cos</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+              <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">Qchoice</span> <span class="o">==</span> <span class="mi">14</span><span class="p">)</span>
+                      <span class="k">return</span> <span class="n">Feynman</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+              <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">Qchoice</span> <span class="o">==</span> <span class="mi">15</span><span class="p">)</span>
+                      <span class="k">return</span> <span class="n">Yukawa</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+              <span class="p">}</span>
+ <span class="p">}</span>
 </pre></div>
 </div>
-<p>In this tutorial, we have initialized <code class="docutils literal notranslate"><span class="pre">loc</span></code>, a random set of points in <span class="math notranslate nohighlight">\((-1, 1)\)</span> which are then passed to the constructor of object <code class="docutils literal notranslate"><span class="pre">AFMM</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Eigen</span><span class="p">::</span><span class="n">MatrixXd</span> <span class="n">loc</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">Dimension</span><span class="p">);</span>
-
-<span class="k">for</span> <span class="p">(</span><span class="n">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-
-  <span class="k">for</span> <span class="p">(</span><span class="n">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">Dimension</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-
-    <span class="n">loc</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">)</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">double</span><span class="p">(</span><span class="n">rand</span><span class="p">())</span><span class="o">/</span><span class="n">double</span><span class="p">(</span><span class="n">RAND_MAX</span><span class="p">)</span><span class="o">-</span><span class="mf">1.0</span><span class="p">;</span> <span class="o">//</span> <span class="n">domain</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+</div>
+<div class="section" id="defining-location-of-particles">
+<h2>Defining location of particles:<a class="headerlink" href="#defining-location-of-particles" title="Permalink to this headline">¶</a></h2>
+<p>In this tutorial, we have initialized <code class="docutils literal notranslate"><span class="pre">particles</span></code>, at the tensor product grid of uniformly distributed <span class="math notranslate nohighlight">\(pow(cubeRootN,3)\)</span> number of particles in <span class="math notranslate nohighlight">\((-L, L)^3\)</span> which are then passed to the constructor of object <code class="docutils literal notranslate"><span class="pre">HODLR3D</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">set_Uniform_Nodes</span><span class="p">(</span><span class="nb">int</span> <span class="n">cubeRootN</span><span class="p">,</span> <span class="n">double</span> <span class="n">L</span><span class="p">,</span> <span class="n">std</span><span class="p">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">pts3D</span><span class="o">&gt;&amp;</span> <span class="n">particles</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">std</span><span class="p">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">double</span><span class="o">&gt;</span> <span class="n">Nodes1D</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">k</span><span class="o">&lt;</span><span class="n">cubeRootN</span><span class="p">;</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Nodes1D</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="o">-</span><span class="n">L</span><span class="o">+</span><span class="mf">2.0</span><span class="o">*</span><span class="n">L</span><span class="o">*</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mf">1.0</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">cubeRootN</span><span class="o">+</span><span class="mf">1.0</span><span class="p">));</span>
+  <span class="p">}</span>
+  <span class="n">pts3D</span> <span class="n">temp1</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">cubeRootN</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">k</span><span class="o">&lt;</span><span class="n">cubeRootN</span><span class="p">;</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">cubeRootN</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">temp1</span><span class="o">.</span><span class="n">x</span>       <span class="o">=</span>       <span class="n">Nodes1D</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+        <span class="n">temp1</span><span class="o">.</span><span class="n">y</span>       <span class="o">=</span>       <span class="n">Nodes1D</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+        <span class="n">temp1</span><span class="o">.</span><span class="n">z</span>       <span class="o">=</span>       <span class="n">Nodes1D</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="n">particles</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">temp1</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
+<p>One can also define particles at a distribution of choice and pass that to the constructor of object <code class="docutils literal notranslate"><span class="pre">HODLR3D</span></code>.</p>
 </div>
 <div class="section" id="defining-vector-b">
 <h2>Defining vector <code class="docutils literal notranslate"><span class="pre">b</span></code>:<a class="headerlink" href="#defining-vector-b" title="Permalink to this headline">¶</a></h2>
-<p>In this tutorial, we have defined <code class="docutils literal notranslate"><span class="pre">b</span></code>, the vector that is to be multiplied to the matrix, as a random set of points:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Eigen</span><span class="p">::</span><span class="n">VectorXd</span> <span class="n">b</span> <span class="o">=</span> <span class="n">Eigen</span><span class="p">::</span><span class="n">VectorXd</span><span class="p">::</span><span class="n">Random</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+<p>In this tutorial, we have defined <code class="docutils literal notranslate"><span class="pre">b</span></code>, the vector that is to be multiplied to the matrix, as a vector consisting of ones and zeros at random locations. This choice of b is considered to test the code in a fast way:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Eigen</span><span class="p">::</span><span class="n">VectorXd</span> <span class="n">b</span><span class="o">=</span><span class="n">Eigen</span><span class="p">::</span><span class="n">VectorXd</span><span class="p">::</span><span class="n">Zero</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+<span class="nb">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">N</span><span class="o">/</span><span class="mi">500</span><span class="p">;</span> <span class="o">//</span><span class="n">randomly</span> <span class="n">choosing</span> <span class="n">n</span> <span class="n">different</span> <span class="n">indices</span> <span class="n">where</span> <span class="n">b</span> <span class="ow">is</span> <span class="nb">set</span> <span class="n">to</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span> <span class="n">at</span> <span class="n">the</span> <span class="n">rest</span> <span class="n">of</span> <span class="n">the</span> <span class="n">indices</span> <span class="ow">is</span> <span class="nb">set</span> <span class="n">to</span> <span class="mi">0</span>
+<span class="n">srand</span><span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="n">NULL</span><span class="p">));</span>
+<span class="n">std</span><span class="p">::</span><span class="nb">set</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">;</span>
+<span class="k">while</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">int</span> <span class="n">index</span>   <span class="o">=</span>       <span class="n">rand</span><span class="p">()</span><span class="o">%</span><span class="n">N</span><span class="p">;</span>
+  <span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">std</span><span class="p">::</span><span class="nb">set</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">::</span><span class="n">iterator</span> <span class="n">it</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">it</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">begin</span><span class="p">();</span> <span class="n">it</span> <span class="o">!=</span> <span class="n">s</span><span class="o">.</span><span class="n">end</span><span class="p">();</span> <span class="n">it</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">b</span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">)</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="creating-the-instance-of-afmm">
-<h2>Creating the Instance of <code class="docutils literal notranslate"><span class="pre">AFMM</span></code>:<a class="headerlink" href="#creating-the-instance-of-afmm" title="Permalink to this headline">¶</a></h2>
-<p>The main operations of this library are carried out through the <code class="docutils literal notranslate"><span class="pre">AFMM</span></code> class. The parameters that are taken for the constructor are N, MinParticlesInLeaf, TOL_POW, loc:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AFMM</span><span class="o">*</span> <span class="n">afmm</span> <span class="o">=</span> <span class="n">new</span> <span class="n">AFMM</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">MinParticlesInLeaf</span><span class="p">,</span> <span class="n">TOL_POW</span><span class="p">,</span> <span class="n">loc</span><span class="p">);</span>
+<div class="section" id="creating-the-instance-of-hodlr3d">
+<h2>Creating the Instance of <code class="docutils literal notranslate"><span class="pre">HODLR3D</span></code>:<a class="headerlink" href="#creating-the-instance-of-hodlr3d" title="Permalink to this headline">¶</a></h2>
+<p>The main operations of this library are carried out through the <code class="docutils literal notranslate"><span class="pre">HODLR3D</span></code> class. The parameters that are taken for the constructor are N, MinParticlesInLeaf, TOL_POW, loc:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">HODLR3D</span> <span class="o">*</span><span class="n">H</span> <span class="o">=</span> <span class="n">new</span> <span class="n">HODLR3D</span><span class="p">(</span><span class="n">nParticlesInLeafAlong1D</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">TOL_POW</span><span class="p">,</span> <span class="n">Qchoice</span><span class="p">,</span> <span class="n">particles</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>We will now proceed to demonstrate the individual methods available under this class.</p>
 <div class="section" id="assemble">
 <h3><code class="docutils literal notranslate"><span class="pre">assemble</span></code><a class="headerlink" href="#assemble" title="Permalink to this headline">¶</a></h3>
-<p>Assemble the matrix in AFMM structure; i.e. it finds the low rank representation of the appropriate matrix sub-blocks:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">afmm</span><span class="o">-&gt;</span><span class="n">assemble</span><span class="p">();</span>
+<p>Assemble the matrix in HODRL3D structure; i.e. it finds the low rank representation of the low-rank matrix sub-blocks:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">H</span><span class="o">-&gt;</span><span class="n">assemble</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="mat-vec-product">
-<h3><code class="docutils literal notranslate"><span class="pre">Mat-Vec</span> <span class="pre">product</span></code><a class="headerlink" href="#mat-vec-product" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="matvecproduct">
+<h3><code class="docutils literal notranslate"><span class="pre">MatVecProduct</span></code><a class="headerlink" href="#matvecproduct" title="Permalink to this headline">¶</a></h3>
 <p>Multiplies the matrix that is defined through object <code class="docutils literal notranslate"><span class="pre">userkernel</span></code> with the vector <code class="docutils literal notranslate"><span class="pre">b</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">outputVec</span> <span class="o">=</span> <span class="n">afmm</span><span class="o">-&gt;</span><span class="n">computeMatVecProduct</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">H</span><span class="o">-&gt;</span><span class="n">MatVecProduct</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">AFMM_Ab</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>

@@ -1,14 +1,11 @@
 #include "HODLR3D.hpp"
 
-HODLR3D::HODLR3D(int cubeRootN, int nParticlesInLeafAlong1D, double L, int TOL_POW, int Qchoice) {
-		std::vector<pts3D> particles;
+HODLR3D::HODLR3D(int nParticlesInLeafAlong1D, double L, int TOL_POW, int Qchoice, std::vector<pts3D>& particles) {
 		mykernel		=	new userkernel(particles, Qchoice);
-		int nLevels		=	ceil(3*log(double(cubeRootN)/nParticlesInLeafAlong1D)/log(8));
-		A	=	new HODLR3DTree(mykernel, cubeRootN, nLevels, nParticlesInLeafAlong1D, L, TOL_POW);
-
-		A->set_Uniform_Nodes();
-		particles = A->K->particles;
 		N = particles.size();
+		double cubeRootN = pow(N,1.0/3.0);
+		int nLevels		=	ceil(3*log(double(cubeRootN)/nParticlesInLeafAlong1D)/log(8));
+		A	=	new HODLR3DTree(mykernel, N, nLevels, nParticlesInLeafAlong1D, L, TOL_POW);
 		A->K		=	new userkernel(particles, Qchoice);
 		A->createTree();
 		A->assign_Tree_Interactions();
@@ -17,7 +14,7 @@ HODLR3D::HODLR3D(int cubeRootN, int nParticlesInLeafAlong1D, double L, int TOL_P
 		A->assignNonLeafChargeLocations();
 	}
 
-	void HODLR3D::factorize() {
+	void HODLR3D::assemble() {
 		A->getUVtTree();
 	}
 
