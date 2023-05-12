@@ -147,6 +147,6 @@ Assemble the matrix in HODRL3D structure; i.e. it finds the low rank representat
 ``MatVecProduct``
 ^^^^^^^^^^^^^^^^^^^
 
-Multiplies the matrix that is defined through object ``userkernel`` with the vector ``b``::
+Multiplies the matrix that is defined through object ``userkernel`` with the vector ``b`` and stores the result in vector Hb::
 
-  H->MatVecProduct(b, AFMM_Ab);
+  H->MatVecProduct(b, Hb);
