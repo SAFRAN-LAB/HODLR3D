@@ -32,21 +32,21 @@ Run the generated executable as, for instance,
 
   ./testH 20 6 1 7 7
 
-   Number of particles is: 8000
+Number of particles is: 8000
 
-   Time taken to create the tree is: 0.003958
+Time taken to create the tree is: 0.003958
 
-   Time taken to construct HODLR3D representation is: 0.831133
+Time taken to construct HODLR3D representation is: 0.831133
 
-   Time taken to do Mat-Vec product is: 0.007521
+Time taken to do Mat-Vec product is: 0.007521
 
-   Memory in GB: 0.00284596
+Memory in GB: 0.00284596
 
-   CR: 0.355745
+CR: 0.355745
 
-   max rank: 46
+max rank: 46
 
-   relative forward error: 4.96199e-08
+relative forward error: 4.96199e-08
 
 ------------------------------------------------------------------------------------------------------------------------
 
