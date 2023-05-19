@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reproducibility &mdash; HODLR3D 1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Benchmarks" href="benchmarks.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> HODLR3D<img src="_static/HODLR3D_logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation and Building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarks</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Reproducibility</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#numerical-rank-for-different-kernels">Numerical rank for different kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#various-benchmarks-of-hodlr3d-matrix-vector-product-in-comparison-with-those-of-hodlr-and-mathcal-h-matrix-vector-products-for-the-kernel-frac-1-r">Various benchmarks of HODLR3D matrix-vector product in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> matrix-vector products for the kernel <span class="math notranslate nohighlight">\(\frac{1}{r}\)</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#various-benchmarks-of-hodlr3d-matrix-vector-product-in-comparison-with-those-of-hodlr-and-mathcal-h-matrix-vector-products-for-the-kernel-frac-1-r-4">Various benchmarks of HODLR3D matrix-vector product in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> matrix-vector products for the kernel <span class="math notranslate nohighlight">\(\frac{1}{r^4}\)</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#various-benchmarks-of-hodlr3d-matrix-vector-product-in-comparison-with-those-of-hodlr-and-mathcal-h-matrix-vector-products-for-the-kernel-frac-cos-r-r">Various benchmarks of HODLR3D matrix-vector product in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> matrix-vector products for the kernel <span class="math notranslate nohighlight">\(\frac{cos(r)}{r}\)</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#various-benchmarks-of-the-hodlr3d-accelerated-iterative-solver-for-the-integral-equation-in-comparison-with-those-of-hodlr-and-mathcal-h">Various benchmarks of the HODLR3D accelerated iterative solver for the integral equation in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">HODLR3D</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Reproducibility</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/reproducibility.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="reproducibility">
+<h1>Reproducibility<a class="headerlink" href="#reproducibility" title="Permalink to this headline">¶</a></h1>
+<p>This part of the documentation helps in reproducing the results shown in the article titled “HODLR3D: Hierarchical matrices for <span class="math notranslate nohighlight">\(N\)</span>-body problems in three dimensions”.</p>
+<div class="section" id="numerical-rank-for-different-kernels">
+<h2>Numerical rank for different kernels<a class="headerlink" href="#numerical-rank-for-different-kernels" title="Permalink to this headline">¶</a></h2>
+<p>To obtain Figure 5 (numerical rank vs N) and Figure 7 (Plot of singular values <span class="math notranslate nohighlight">\(\sigma_{i}\)</span> normalized with the first singular value versus index <span class="math notranslate nohighlight">\(i\)</span>) of the article, the following steps are to be followed</p>
+<ol class="arabic simple">
+<li>Run the file <code class="docutils literal notranslate"><span class="pre">Matlab_files/get_singular_values.m</span></code><ul>
+<li>The input to the file is ‘choice’ that decides what kernel is to be used. Enter 1 for <span class="math notranslate nohighlight">\(1/r\)</span>, 2 for <span class="math notranslate nohighlight">\(1/r^4\)</span>, 3 for <span class="math notranslate nohighlight">\(cos(r)/r\)</span>.</li>
+<li>The outputs of the file are svd_f (singular values of the face sharing interaction), svd_e (edge sharing interaction), svd_v (vertex sharing interaction), svd_w (well-separated interaction), and N (the matrix size).</li>
+<li>These outputs are written to file “output_file_%d_%d.mat”. The first argument is ‘N’ (the size of the matrix) and the second argument is ‘choice’.</li>
+<li>For example, if ‘choice’ 1 is inputed, it means that the singular values of various off-diagonal interactions will be computed for the kernel <span class="math notranslate nohighlight">\(1/r\)</span>.</li>
+</ul>
+</li>
+<li>Run the file <code class="docutils literal notranslate"><span class="pre">Matlab_files/getRanks.m</span></code><ul>
+<li>For the singular values loaded from a given file, the code outputs the numerical rank for a given tolerance of ‘tolr’.</li>
+<li>For example, in line 12 of the code, if ‘data = load(‘output_file_125_1.mat’);’, it means it reads the singular values of various off-diagonal interactions with the size of the matrix set to 125 and the kernel set to choice 1.</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="various-benchmarks-of-hodlr3d-matrix-vector-product-in-comparison-with-those-of-hodlr-and-mathcal-h-matrix-vector-products-for-the-kernel-frac-1-r">
+<h2>Various benchmarks of HODLR3D matrix-vector product in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> matrix-vector products for the kernel <span class="math notranslate nohighlight">\(\frac{1}{r}\)</span><a class="headerlink" href="#various-benchmarks-of-hodlr3d-matrix-vector-product-in-comparison-with-those-of-hodlr-and-mathcal-h-matrix-vector-products-for-the-kernel-frac-1-r" title="Permalink to this headline">¶</a></h2>
+<p>To reproduce the results illustrated in Figure 9 of the article, follow the instructions given here. Key in the file <code class="docutils literal notranslate"><span class="pre">`examples/testHODLR3D.cpp</span></code> as input under <code class="docutils literal notranslate"><span class="pre">INPUT_FILE</span></code> in <code class="docutils literal notranslate"><span class="pre">HODLR3Dlib/CMakeLists.txt</span></code>. Here you also set the name of the output executable, say <code class="docutils literal notranslate"><span class="pre">testHODLR3D</span></code>, under <code class="docutils literal notranslate"><span class="pre">OUTPUT_EXECUTABLE_NAME</span></code>.
+Compile and build the executable as described in <a class="reference internal" href="installation.html#testing"><span class="std std-ref">Testing</span></a>. Then run the executable with the following inputs at runtime</p>
+<ol class="arabic simple">
+<li>cubeRootN = vary between 20 and 150 with a step size of 10</li>
+<li>nParticlesInLeafAlong1D = 6</li>
+<li>L = 1.0</li>
+<li>TOL_POW = 7</li>
+<li>Qchoice = 7</li>
+</ol>
+<p>For example, run the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">testHODLR3D</span> <span class="mi">20</span> <span class="mi">6</span> <span class="mf">1.0</span> <span class="mi">7</span> <span class="mi">7</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="various-benchmarks-of-hodlr3d-matrix-vector-product-in-comparison-with-those-of-hodlr-and-mathcal-h-matrix-vector-products-for-the-kernel-frac-1-r-4">
+<h2>Various benchmarks of HODLR3D matrix-vector product in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> matrix-vector products for the kernel <span class="math notranslate nohighlight">\(\frac{1}{r^4}\)</span><a class="headerlink" href="#various-benchmarks-of-hodlr3d-matrix-vector-product-in-comparison-with-those-of-hodlr-and-mathcal-h-matrix-vector-products-for-the-kernel-frac-1-r-4" title="Permalink to this headline">¶</a></h2>
+<p>To reproduce the results illustrated in Figure 10 of the article, follow the instructions given here. Key in the file <code class="docutils literal notranslate"><span class="pre">`examples/testHODLR3D.cpp</span></code> as input under <code class="docutils literal notranslate"><span class="pre">INPUT_FILE</span></code> in <code class="docutils literal notranslate"><span class="pre">HODLR3Dlib/CMakeLists.txt</span></code>. Here you also set the name of the output executable, say <code class="docutils literal notranslate"><span class="pre">testHODLR3D</span></code>, under <code class="docutils literal notranslate"><span class="pre">OUTPUT_EXECUTABLE_NAME</span></code>.
+Compile and build the executable as described in <a class="reference internal" href="installation.html#testing"><span class="std std-ref">Testing</span></a>. Then run the executable with the following inputs at runtime</p>
+<ol class="arabic simple">
+<li>cubeRootN = vary between 20 and 150 with a step size of 10</li>
+<li>nParticlesInLeafAlong1D = 6</li>
+<li>L = 1.0</li>
+<li>TOL_POW = 7</li>
+<li>Qchoice = 8</li>
+</ol>
+<p>For example, run the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">testHODLR3D</span> <span class="mi">20</span> <span class="mi">6</span> <span class="mf">1.0</span> <span class="mi">7</span> <span class="mi">8</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="various-benchmarks-of-hodlr3d-matrix-vector-product-in-comparison-with-those-of-hodlr-and-mathcal-h-matrix-vector-products-for-the-kernel-frac-cos-r-r">
+<h2>Various benchmarks of HODLR3D matrix-vector product in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> matrix-vector products for the kernel <span class="math notranslate nohighlight">\(\frac{cos(r)}{r}\)</span><a class="headerlink" href="#various-benchmarks-of-hodlr3d-matrix-vector-product-in-comparison-with-those-of-hodlr-and-mathcal-h-matrix-vector-products-for-the-kernel-frac-cos-r-r" title="Permalink to this headline">¶</a></h2>
+<p>To reproduce the results illustrated in Figure 11 of the article, follow the instructions given here. Key in the file <code class="docutils literal notranslate"><span class="pre">`examples/testHODLR3D.cpp</span></code> as input under <code class="docutils literal notranslate"><span class="pre">INPUT_FILE</span></code> in <code class="docutils literal notranslate"><span class="pre">HODLR3Dlib/CMakeLists.txt</span></code>. Here you also set the name of the output executable, say <code class="docutils literal notranslate"><span class="pre">testHODLR3D</span></code>, under <code class="docutils literal notranslate"><span class="pre">OUTPUT_EXECUTABLE_NAME</span></code>.
+Compile and build the executable as described in <a class="reference internal" href="installation.html#testing"><span class="std std-ref">Testing</span></a>. Then run the executable with the following inputs at runtime</p>
+<ol class="arabic simple">
+<li>cubeRootN = vary between 20 and 150 with a step size of 10</li>
+<li>nParticlesInLeafAlong1D = 6</li>
+<li>L = 1.0</li>
+<li>TOL_POW = 7</li>
+<li>Qchoice = 13</li>
+</ol>
+<p>For example, run the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">testHODLR3D</span> <span class="mi">20</span> <span class="mi">6</span> <span class="mf">1.0</span> <span class="mi">7</span> <span class="mi">13</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="various-benchmarks-of-the-hodlr3d-accelerated-iterative-solver-for-the-integral-equation-in-comparison-with-those-of-hodlr-and-mathcal-h">
+<h2>Various benchmarks of the HODLR3D accelerated iterative solver for the integral equation in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span><a class="headerlink" href="#various-benchmarks-of-the-hodlr3d-accelerated-iterative-solver-for-the-integral-equation-in-comparison-with-those-of-hodlr-and-mathcal-h" title="Permalink to this headline">¶</a></h2>
+<p>To reproduce the results illustrated in Figure 12 of the article, follow the instructions given here. Key in the file <code class="docutils literal notranslate"><span class="pre">`examples/testHODLR3Dsolve.cpp</span></code> as input under <code class="docutils literal notranslate"><span class="pre">INPUT_FILE</span></code> in <code class="docutils literal notranslate"><span class="pre">HODLR3Dlib/CMakeLists.txt</span></code>. Here you also set the name of the output executable, say <code class="docutils literal notranslate"><span class="pre">testHODLR3Dsolve</span></code>, under <code class="docutils literal notranslate"><span class="pre">OUTPUT_EXECUTABLE_NAME</span></code>.
+Compile and build the executable as described in <a class="reference internal" href="installation.html#testing"><span class="std std-ref">Testing</span></a>. Then run the executable with the following inputs at runtime</p>
+<ol class="arabic simple">
+<li>cubeRootN = vary between 20 and 150 with a step size of 10</li>
+<li>nParticlesInLeafAlong1D = 6</li>
+<li>L = 1.0</li>
+<li>TOL_POW = 7</li>
+<li>Qchoice = 16</li>
+</ol>
+<p>For example, run the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">testHODLR3Dsolve</span> <span class="mi">20</span> <span class="mi">6</span> <span class="mf">1.0</span> <span class="mi">7</span> <span class="mi">16</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="benchmarks.html" class="btn btn-neutral float-left" title="Benchmarks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, V A Kandappan, Vaishnavi Gujjula, Sivaram Ambiksaran.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

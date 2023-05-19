@@ -45,44 +45,49 @@ Creating a Derived Class of ``kernel``:
 The matrix that needs to be solved for is abstracted through this derived class of ``kernel``. The main method that needs to be set for this class is ``getMatrixEntry`` which returns the entry at the :math:`i^{\mathrm{th}}` row and :math:`j^{\mathrm{th}}` column of the matrix. Many kernel functions are defined, choose the that is needed using the Qchoice parameter at run-time. If a kernel function that is not already defined, one can define it at this function ``getMatrixEntry``. The ``getMatrixEntry`` is defined as follows in the ``testHODLR3D.cpp`` file::
 
   double userkernel::getMatrixEntry(const unsigned i, const unsigned j) {
-	 if (i==j) {
-	 	return 0.0;
-	 }
-	 else {
-		if (Qchoice == 0)
-			return RBF_Logarithm(i, j);
-		else if (Qchoice == 1)
-			return RBF_Exponential(i, j);
-		else if (Qchoice == 2)
-			return RBF_Inverse_Quadric(i, j);
-		else if (Qchoice == 3)
-			return RBF_Quadric(i, j);
-		else if (Qchoice == 4)
-			return RBF_Inverse_Multi_Quadric(i, j);
-		else if (Qchoice == 5)
-			return RBF_Gaussian(i, j);
-		else if (Qchoice == 6)
-			return RBF_Multi_quadric(i, j);
-		else if (Qchoice == 7)
-			return Laplacian_3D(i, j);
-		else if (Qchoice == 8)
-			return oneOverR4(i, j);
-		else if (Qchoice == 9)
-			return Laplacian_2D(i, j);
-		else if (Qchoice == 10)
-			return RBF_spline(i, j);
-		else if (Qchoice == 11)
-			return kernel_besselJ(i, j);
-		else if (Qchoice == 12)
-			return kernel_besselY(i, j);
-		else if (Qchoice == 13)
-			return Helmholtz_cos(i, j);
-		else if (Qchoice == 14)
-			return Feynman(i, j);
-		else if (Qchoice == 15)
-			return Yukawa(i, j);
-		}
-   }
+    if (Qchoice != 16) {
+  	 if (i==j) {
+  	 	return 0.0;
+  	 }
+  	 else {
+  		if (Qchoice == 0)
+  			return RBF_Logarithm(i, j);
+  		else if (Qchoice == 1)
+  			return RBF_Exponential(i, j);
+  		else if (Qchoice == 2)
+  			return RBF_Inverse_Quadric(i, j);
+  		else if (Qchoice == 3)
+  			return RBF_Quadric(i, j);
+  		else if (Qchoice == 4)
+  			return RBF_Inverse_Multi_Quadric(i, j);
+  		else if (Qchoice == 5)
+  			return RBF_Gaussian(i, j);
+  		else if (Qchoice == 6)
+  			return RBF_Multi_quadric(i, j);
+  		else if (Qchoice == 7)
+  			return Laplacian_3D(i, j);
+  		else if (Qchoice == 8)
+  			return oneOverR4(i, j);
+  		else if (Qchoice == 9)
+  			return Laplacian_2D(i, j);
+  		else if (Qchoice == 10)
+  			return RBF_spline(i, j);
+  		else if (Qchoice == 11)
+  			return kernel_besselJ(i, j);
+  		else if (Qchoice == 12)
+  			return kernel_besselY(i, j);
+  		else if (Qchoice == 13)
+  			return Helmholtz_cos(i, j);
+  		else if (Qchoice == 14)
+  			return Feynman(i, j);
+  		else if (Qchoice == 15)
+  			return Yukawa(i, j);
+  		}
+     }
+     else {
+   		return IE_CUBE_3D(i,j);
+   	 }
+    }
 
 Defining location of particles:
 -------------------------------

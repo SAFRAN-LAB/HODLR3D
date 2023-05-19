@@ -50,6 +50,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reproducibility.html">Reproducibility</a></li>
 </ul>
 
         </div>
@@ -109,7 +110,7 @@ user@computer HODLR3D$ export CXX=g++
 </div>
 </div>
 <div class="section" id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<span id="id1"></span><h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
 <p>Now, we need to ensure that all the functions of the libraries function as intended. For this purpose, we will be running the script <code class="docutils literal notranslate"><span class="pre">examples/testHODLR3D.cpp</span></code>.
 Key in the file <code class="docutils literal notranslate"><span class="pre">`examples/testHODLR3D.cpp</span></code> as input under <code class="docutils literal notranslate"><span class="pre">INPUT_FILE</span></code> in <code class="docutils literal notranslate"><span class="pre">HODLR3Dlib/CMakeLists.txt</span></code>. Here you also set the name of the output executable, say <code class="docutils literal notranslate"><span class="pre">testHODLR3D</span></code>, under <code class="docutils literal notranslate"><span class="pre">OUTPUT_EXECUTABLE_NAME</span></code>.
 Then create a directory called <code class="docutils literal notranslate"><span class="pre">build</span></code> and navigate to your build directory and run <code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">path/to/CMakeLists.txt</span></code> and run the generated <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> to get your executable.

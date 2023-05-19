@@ -38,6 +38,7 @@ Doc Contents
    installation
    tutorial
    benchmarks
+   reproducibility
 
 Other Links
 ===========

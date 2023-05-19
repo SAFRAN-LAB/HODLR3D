@@ -52,6 +52,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reproducibility.html">Reproducibility</a></li>
 </ul>
 
         </div>
@@ -114,6 +115,7 @@
 <h2>Creating a Derived Class of <code class="docutils literal notranslate"><span class="pre">kernel</span></code>:<a class="headerlink" href="#creating-a-derived-class-of-kernel" title="Permalink to this headline">¶</a></h2>
 <p>The matrix that needs to be solved for is abstracted through this derived class of <code class="docutils literal notranslate"><span class="pre">kernel</span></code>. The main method that needs to be set for this class is <code class="docutils literal notranslate"><span class="pre">getMatrixEntry</span></code> which returns the entry at the <span class="math notranslate nohighlight">\(i^{\mathrm{th}}\)</span> row and <span class="math notranslate nohighlight">\(j^{\mathrm{th}}\)</span> column of the matrix. Many kernel functions are defined, choose the that is needed using the Qchoice parameter at run-time. If a kernel function that is not already defined, one can define it at this function <code class="docutils literal notranslate"><span class="pre">getMatrixEntry</span></code>. The <code class="docutils literal notranslate"><span class="pre">getMatrixEntry</span></code> is defined as follows in the <code class="docutils literal notranslate"><span class="pre">testHODLR3D.cpp</span></code> file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">double</span> <span class="n">userkernel</span><span class="p">::</span><span class="n">getMatrixEntry</span><span class="p">(</span><span class="n">const</span> <span class="n">unsigned</span> <span class="n">i</span><span class="p">,</span> <span class="n">const</span> <span class="n">unsigned</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">Qchoice</span> <span class="o">!=</span> <span class="mi">16</span><span class="p">)</span> <span class="p">{</span>
        <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
               <span class="k">return</span> <span class="mf">0.0</span><span class="p">;</span>
        <span class="p">}</span>
@@ -151,7 +153,11 @@
               <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">Qchoice</span> <span class="o">==</span> <span class="mi">15</span><span class="p">)</span>
                       <span class="k">return</span> <span class="n">Yukawa</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
               <span class="p">}</span>
- <span class="p">}</span>
+   <span class="p">}</span>
+   <span class="k">else</span> <span class="p">{</span>
+              <span class="k">return</span> <span class="n">IE_CUBE_3D</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">);</span>
+       <span class="p">}</span>
+  <span class="p">}</span>
 </pre></div>
 </div>
 </div>

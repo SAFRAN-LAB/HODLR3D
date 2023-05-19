@@ -32,6 +32,8 @@ Then, set the environment variable ``EIGEN_PATH`` to the location of your Eigen 
 
     user@computer HODLR3D$ export EIGEN_PATH=path/to/eigen/
 
+.. _Testing:
+
 Testing
 -------
 
