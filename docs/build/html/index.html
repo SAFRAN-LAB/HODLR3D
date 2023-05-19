@@ -81,8 +81,7 @@
 <li>locations of nodes in the domain through a std::vector <code class="docutils literal notranslate"><span class="pre">particles</span></code></li>
 <li>the vector <code class="docutils literal notranslate"><span class="pre">b</span></code> to be multiplied to the matrix</li>
 </ul>
-<p>The algorithm has been parallelized using OpenMP.</p>
-<p>Obtains <span class="math notranslate nohighlight">\(A x\)</span> at a cost of <span class="math notranslate nohighlight">\(\mathcal{O}\left(N\log(N)\right)\)</span></p>
+<p>It obtains <span class="math notranslate nohighlight">\(A x\)</span> in almost linear complexity.</p>
 </div>
 <div class="section" id="doc-contents">
 <h2>Doc Contents<a class="headerlink" href="#doc-contents" title="Permalink to this headline">¶</a></h2>
@@ -109,10 +108,11 @@
 <li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reproducibility.html">Reproducibility</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="reproducibility.html#numerical-rank-for-different-kernels">Numerical rank for different kernels</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reproducibility.html#various-benchmarks-of-hodlr3d-matrix-vector-product-in-comparison-with-those-of-hodlr-and-mathcal-h-matrix-vector-products-for-the-kernel-frac-1-r">Various benchmarks of HODLR3D matrix-vector product in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> matrix-vector products for the kernel <span class="math notranslate nohighlight">\(\frac{1}{r}\)</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reproducibility.html#various-benchmarks-of-hodlr3d-matrix-vector-product-in-comparison-with-those-of-hodlr-and-mathcal-h-matrix-vector-products-for-the-kernel-frac-1-r-4">Various benchmarks of HODLR3D matrix-vector product in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> matrix-vector products for the kernel <span class="math notranslate nohighlight">\(\frac{1}{r^4}\)</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reproducibility.html#various-benchmarks-of-hodlr3d-matrix-vector-product-in-comparison-with-those-of-hodlr-and-mathcal-h-matrix-vector-products-for-the-kernel-frac-cos-r-r">Various benchmarks of HODLR3D matrix-vector product in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> matrix-vector products for the kernel <span class="math notranslate nohighlight">\(\frac{cos(r)}{r}\)</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reproducibility.html#various-benchmarks-of-the-hodlr3d-accelerated-iterative-solver-for-the-integral-equation-in-comparison-with-those-of-hodlr-and-mathcal-h">Various benchmarks of the HODLR3D accelerated iterative solver for the integral equation in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reproducibility.html#numerical-benchmarks-of-hodlr3d-matrix-vector-product-in-comparison-with-those-of-hodlr-and-mathcal-h-matrix-vector-products-for-the-kernel-frac-1-r">Numerical benchmarks of HODLR3D matrix-vector product in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> matrix-vector products for the kernel <span class="math notranslate nohighlight">\(\frac{1}{r}\)</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reproducibility.html#numerical-benchmarks-of-hodlr3d-matrix-vector-product-in-comparison-with-those-of-hodlr-and-mathcal-h-matrix-vector-products-for-the-kernel-frac-1-r-4">Numerical benchmarks of HODLR3D matrix-vector product in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> matrix-vector products for the kernel <span class="math notranslate nohighlight">\(\frac{1}{r^4}\)</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reproducibility.html#numerical-benchmarks-of-hodlr3d-matrix-vector-product-in-comparison-with-those-of-hodlr-and-mathcal-h-matrix-vector-products-for-the-kernel-frac-cos-r-r">Numerical benchmarks of HODLR3D matrix-vector product in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> matrix-vector products for the kernel <span class="math notranslate nohighlight">\(\frac{cos(r)}{r}\)</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reproducibility.html#numerical-benchmarks-of-the-hodlr3d-accelerated-iterative-solver-for-the-integral-equation-in-comparison-with-those-of-hodlr-and-mathcal-h">Numerical benchmarks of the HODLR3D accelerated iterative solver for the integral equation in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reproducibility.html#numerical-benchmarks-of-parallel-hodlr3d-matrix-vector-product-using-mpi">Numerical benchmarks of parallel HODLR3D matrix-vector product using MPI</a></li>
 </ul>
 </li>
 </ul>
@@ -122,8 +122,8 @@
 <h2>Other Links<a class="headerlink" href="#other-links" title="Permalink to this headline">¶</a></h2>
 <p>Learn more about <span class="math notranslate nohighlight">\(\texttt{HODLR3Dlib}\)</span> by visiting the</p>
 <ul class="simple">
-<li>Code Repository: <a class="reference external" href="http://github.com/sivaramambikasaran/AFMM2D">http://github.com/sivaramambikasaran/AFMM2D</a></li>
-<li>Documentation: <a class="reference external" href="http://afmm2d.rtfd.io">http://afmm2d.rtfd.io</a></li>
+<li>Code Repository: <a class="reference external" href="https://github.com/SAFRAN-LAB/HODLR3D">https://github.com/SAFRAN-LAB/HODLR3D</a></li>
+<li>Documentation: <a class="reference external" href="https://hodlr3d.readthedocs.io/en/latest/">https://hodlr3d.readthedocs.io/en/latest/</a></li>
 </ul>
 </div>
 </div>

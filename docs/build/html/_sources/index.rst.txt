@@ -25,9 +25,7 @@ The code is written in C++ and features an easy-to-use interface, where the user
 
 - the vector ``b`` to be multiplied to the matrix
 
-The algorithm has been parallelized using OpenMP.
-
-Obtains :math:`A x` at a cost of :math:`\mathcal{O}\left(N\log(N)\right)`
+It obtains :math:`A x` in almost linear complexity.
 
 Doc Contents
 ============
@@ -45,5 +43,5 @@ Other Links
 
 Learn more about :math:`\texttt{HODLR3Dlib}` by visiting the
 
-* Code Repository: http://github.com/sivaramambikasaran/AFMM2D
-* Documentation: http://afmm2d.rtfd.io
+* Code Repository: https://github.com/SAFRAN-LAB/HODLR3D
+* Documentation: https://hodlr3d.readthedocs.io/en/latest/
