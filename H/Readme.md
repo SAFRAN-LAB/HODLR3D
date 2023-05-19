@@ -2,7 +2,7 @@ The folder HODLR3D/H contains the files related to the H matrix that is consider
 
 "testH.cpp" performs H matrix vector product. The matrix entries are to be defined in the function "getMatrixEntry(i,j)" of the kernel.hpp file.
 
-The vector to be multiplied to the matrix is to be defined as vector "b" of "testH.cpp" file. Currently for test purposes, it is defined as a vector containing ones and zeros at random locations.
+The vector to be multiplied to the matrix is to be defined as vector "b" of "testH.cpp" file. For test purposes, it is defined as a vector containing ones and zeros at random locations.
 
 The particles are currently distributed uniformly. To change the location of particles, define the vector "particles" of object "mykernel" of file "testH.cpp" accordingly.
 
