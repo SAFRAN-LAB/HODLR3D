@@ -30,7 +30,7 @@ It takes these inputs at run time:
 
   Run the generated executable as, for instance,
 
-   ./testHODLR 20 6 1 7 7
+    ./testHODLR 20 6 1 7 7
 
    Number of particles is: 8000
 
@@ -80,7 +80,7 @@ It takes these inputs at run time:
 
   Run the generated executable as, for instance,
 
-  ./testHODLRsolve 20 6 1 7 16
+    ./testHODLRsolve 20 6 1 7 16
 
   Number of particles is: 8000
 

@@ -30,7 +30,7 @@ Then make the file
 
 Run the generated executable as, for instance,
 
-   ./testH 20 6 1 7 7
+  ./testH 20 6 1 7 7
 
    Number of particles is: 8000
 
@@ -80,7 +80,7 @@ It takes these inputs at run time:
 
   Run the generated executable as, for instance,
 
-  ./testHsolve 20 6 1 7 16
+    ./testHsolve 20 6 1 7 16
 
   Number of particles is: 8000
 
