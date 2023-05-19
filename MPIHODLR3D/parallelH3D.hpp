@@ -14,9 +14,6 @@ bool inline isPowerOfTwo(int n){
 /*
 This header files create a parallel construct for the
 HODLR3D low-rank structure.
-TODO 1: Construct at class that creates the tree and has access to the data structures
-TODO 2: Minumum working example for n_p = 2,4,8  
-TODO 3: Generalize for Super nodes
 */
 
 int logn(double x,int n=10){
@@ -38,7 +35,6 @@ class parallelH3Dtree{
             
         MPI_Comm_size(MPI_COMM_WORLD,&numprocs);
         MPI_Comm_rank(MPI_COMM_WORLD,&myid);
-        
         
         // Update process information to the TREE class (possible update would be to inherit)
         this->np = np;
