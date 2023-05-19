@@ -7,6 +7,7 @@
 #include <map>
 #include "definitions.hpp"
 #include <boost/math/special_functions/bessel.hpp>
+#include "Integral3D.hpp"
 
 class kernel {
 public:
@@ -36,10 +37,30 @@ public:
 class userkernel: public kernel {
 public:
 	int Qchoice;
+  double Kii;
+	double h3;
 
-	userkernel(std::vector<pts3D> particles, int Qchoice): kernel(particles) {
-		this->Qchoice = Qchoice;
-	};
+  userkernel(std::vector<pts3D> particles, int Qchoice): kernel(particles) {
+    this->Qchoice = Qchoice;
+    if(Qchoice == 17){
+      double h = 1.0/cbrt(double(particles.size()));
+      double *a,*b;
+      a = new double[3];
+      b = new double[3];
+      a[0] = 0;
+      a[1] = 0;
+      a[2] = 0;
+
+      b[0] = h*0.5;
+      b[1] = h*0.5;
+      b[2] = h*0.5;
+      Kii = triple_integral(a,b);
+      Kii += 1; //For Second kind integral equation.
+      h3 = 1.0/double(particles.size());
+    }
+  };
+
+  double IE_CUBE_3D(const unsigned i,const unsigned j);
 
 	// RBF Logarithm
 	double RBF_Logarithm(const unsigned i, const unsigned j);

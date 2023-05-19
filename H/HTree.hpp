@@ -95,23 +95,6 @@ H3DTree(kerneltype* K, int cubeRootN, int nLevels, int nParticlesInLeafAlong1D, 
 		}
 	}
 
-	// void set_Uniform_Nodes() {
-	// 	for (int k=0; k<nParticlesInLeafAlong1D; ++k) {
-	// 		Nodes1D.push_back(-1.0+2.0*(k+1.0)/(nParticlesInLeafAlong1D+1.0));
-	// 	}
-	// 	pts3D temp1;
-	// 	for (int j=0; j<nParticlesInLeafAlong1D; ++j) {
-	// 		for (int k=0; k<nParticlesInLeafAlong1D; ++k) {
-	// 			for (int i=0; i<nParticlesInLeafAlong1D; ++i) {
-	// 				temp1.x	=	Nodes1D[k];
-	// 				temp1.y	=	Nodes1D[j];
-	// 				temp1.z	=	Nodes1D[i];
-	// 				Nodes.push_back(temp1);
-	// 			}
-	// 		}
-	// 	}
-	// }
-
 	void set_Uniform_Nodes() {
 		for (int k=0; k<cubeRootN; ++k) {
 			Nodes1D.push_back(-L+2.0*L*(k+1.0)/(cubeRootN+1.0));
@@ -172,37 +155,6 @@ H3DTree(kerneltype* K, int cubeRootN, int nLevels, int nParticlesInLeafAlong1D, 
 				level.push_back(box);
 			}
 			tree.push_back(level);
-		}
-	}
-
-	void check() {
-		for (size_t j = 2; j <= nLevels; j++) {
-			int sum = 0;
-			for (size_t k = 0; k < nBoxesPerLevel[j]; k++) {
-				sum += tree[j][k].charges.size();
-				// std::cout << "j: " << j << "	k: " << k << std::endl;
-				for (size_t c = 0; c < tree[j][k].charges.size(); c++) {
-					std::cout << tree[j][k].charges[c] << ",";
-				}
-				std::cout << std::endl;
-				// for (size_t n = 0; n < 26; n++) {
-				// 	std::cout << tree[j][k].neighborNumbers[n] << std::endl;
-				// }
-			}
-			std::cout << "sum: " << sum << std::endl;
-		}
-	}
-
-	void check2() {
-		int j=1;
-		for (size_t k = 0; k < nBoxesPerLevel[j]; k++) {
-			std::cout << "j: " << j << "	k: " << k << std::endl;
-			for (size_t n = 0; n < 26; n++) {
-				if (tree[j][k].neighborNumbers[n] != -1) {
-					std::cout << tree[j][k].neighborNumbers[n] << "," << std::endl;
-				}
-			}
-			std::cout << std::endl;
 		}
 	}
 
@@ -1862,30 +1814,15 @@ H3DTree(kerneltype* K, int cubeRootN, int nLevels, int nParticlesInLeafAlong1D, 
 
 	void assignCharges(Eigen::VectorXd &charges) {
 		int start = 0;
-		// std::cout << "charges" << std::endl;
 		for (size_t j = 1; j <= nLevels; j++) {
 			for (size_t k = 0; k < nBoxesPerLevel[j]; k++) {
 				tree[j][k].charges = Eigen::VectorXd::Zero(tree[j][k].chargeLocations.size());
 				for (size_t i = 0; i < tree[j][k].chargeLocations.size(); i++) {
 					tree[j][k].charges[i] = charges[tree[j][k].chargeLocations[i]];
-					// std::cout << tree[j][k].chargeLocations[i] << std::endl;
 				}
-				// std::cout << "---------" << std::endl;
 			}
 		}
 	}
-
-  // void assignLeafChargeLocations() {
-	// 	for (size_t k = 0; k < nBoxesPerLevel[nLevels]; k++) {
-  //     int startIndex = gridPoints.size();
-  //     for (size_t i = 0; i < nParticlesInLeaf; i++) {
-  //       tree[nLevels][k].chargeLocations.push_back(startIndex+i);
-  //     }
-  //     shift_Nodes(boxRadius[nLevels], tree[nLevels][k].center, gridPoints);
-  //   }
-  //   K->particles_X = gridPoints;//object of base class FMM_Matrix
-  //   K->particles_Y = gridPoints;
-  // }
 
 	void assignNonLeafChargeLocations() {
 		for (int j = nLevels-1; j >= 1; j--) {
@@ -1894,7 +1831,6 @@ H3DTree(kerneltype* K, int cubeRootN, int nLevels, int nParticlesInLeafAlong1D, 
 				for (size_t c = 0; c < 8; c++) {
 					tree[j][k].chargeLocations.insert(tree[j][k].chargeLocations.end(), tree[j+1][8*k+c].chargeLocations.begin(), tree[j+1][8*k+c].chargeLocations.end());
 				}
-				// std::cout << "tree[j][k].charges: " << tree[j][k].charges.size() << std::endl;
 			}
 		}
 	}
@@ -1948,7 +1884,6 @@ H3DTree(kerneltype* K, int cubeRootN, int nLevels, int nParticlesInLeafAlong1D, 
 					tree[j][k].charges.segment(start, tree[j+1][8*k+c].charges.size()) = tree[j+1][8*k+c].charges;
 					start += tree[j+1][8*k+c].charges.size();
 				}
-				// std::cout << "tree[j][k].charges: " << tree[j][k].charges.size() << std::endl;
 			}
 		}
 	}
@@ -1971,9 +1906,6 @@ H3DTree(kerneltype* K, int cubeRootN, int nLevels, int nParticlesInLeafAlong1D, 
 						if (tree[j][k].col_basis[i].size() > 0) {
 							int ki = tree[j][k].interactionList[i];
 							start = omp_get_wtime();
-
-							// Eigen::MatrixXd R = K->getMatrix(tree[j][k].chargeLocations,tree[j][ki].chargeLocations);
-							// tree[j][k].potential += R*tree[j][ki].charges;
 
 							Eigen::MatrixXd Ac = K->getMatrix(tree[j][k].chargeLocations,tree[j][k].col_basis[i]);
 							Eigen::MatrixXd Ar = K->getMatrix(tree[j][k].row_basis[i],tree[j][ki].chargeLocations);
@@ -2075,12 +2007,9 @@ H3DTree(kerneltype* K, int cubeRootN, int nLevels, int nParticlesInLeafAlong1D, 
 			Eigen::VectorXd potentialTemp = Eigen::VectorXd::Zero(N);
 			// #pragma omp parallel for
 			for (size_t k = 0; k < nBoxesPerLevel[j]; k++) { //using the fact that all the leaves have same number of particles
-				// potentialTemp.segment(pow(8,nLevels-j)*nParticlesInLeaf*k, tree[j][k].potential.size()) = tree[j][k].potential;
 				potentialTemp.segment(start, tree[j][k].potential.size()) = tree[j][k].potential;
 				start += tree[j][k].potential.size();
 			}
-			// if(j==nLevels)
-			// reorder(potentialTemp);
 			potential = potential + potentialTemp;
 		}
 	}
@@ -2088,15 +2017,12 @@ H3DTree(kerneltype* K, int cubeRootN, int nLevels, int nParticlesInLeafAlong1D, 
 	void reorder(Eigen::VectorXd &potential) {
 		Eigen::VectorXd potentialTemp = potential;
 		int start = 0;
-		// std::cout << "index: " << std::endl;
 		for (size_t k = 0; k < nBoxesPerLevel[nLevels]; k++) {
 			for (size_t i = 0; i < tree[nLevels][k].chargeLocations.size(); i++) {
 				int index = tree[nLevels][k].chargeLocations[i];
-				// std::cout << index << std::endl;
 				potential(index) = potentialTemp(start);
 				start++;
 			}
-			// std::cout << "---------" << std::endl;
 		}
 	}
 
@@ -2106,9 +2032,6 @@ H3DTree(kerneltype* K, int cubeRootN, int nLevels, int nParticlesInLeafAlong1D, 
 			for (size_t k = 0; k < nBoxesPerLevel[j]; k++) {
 				for (size_t i = 0; i < tree[j][k].interactionList.size(); i++) {
 					int ki = tree[j][k].interactionList[i];
-					//sum += tree[j][k].L[i].cols()*tree[j][k].chargeLocations.size();
-					//sum += tree[j][k].L[i].cols()*tree[j][k].L[i].cols();
-					//sum += tree[j][ki].chargeLocations.size()*tree[j][k].L[i].cols();
 					sum += tree[j][k].R[i].rows()*tree[j][k].R[i].cols();
 					sum += tree[j][k].L[i].rows()*tree[j][k].L[i].cols();
 					sum += tree[j][k].row_basis[i].size();

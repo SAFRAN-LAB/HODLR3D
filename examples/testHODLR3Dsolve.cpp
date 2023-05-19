@@ -30,43 +30,48 @@ void set_Uniform_Nodes(int cubeRootN, double L, std::vector<pts3D>& particles) {
 }
 
 double userkernel::getMatrixEntry(const unsigned i, const unsigned j) {
-	if (i==j) {
-		return 0.0;
+	if (Qchoice != 16) {
+		if (i==j) {
+				return 0.0;
+			}
+		else {
+				if (Qchoice == 0)
+					return RBF_Logarithm(i, j);
+				else if (Qchoice == 1)
+					return RBF_Exponential(i, j);
+				else if (Qchoice == 2)
+					return RBF_Inverse_Quadric(i, j);
+				else if (Qchoice == 3)
+					return RBF_Quadric(i, j);
+				else if (Qchoice == 4)
+					return RBF_Inverse_Multi_Quadric(i, j);
+				else if (Qchoice == 5)
+					return RBF_Gaussian(i, j);
+				else if (Qchoice == 6)
+					return RBF_Multi_quadric(i, j);
+				else if (Qchoice == 7)
+					return Laplacian_3D(i, j);
+				else if (Qchoice == 8)
+					return oneOverR4(i, j);
+				else if (Qchoice == 9)
+					return Laplacian_2D(i, j);
+				else if (Qchoice == 10)
+					return RBF_spline(i, j);
+				else if (Qchoice == 11)
+					return kernel_besselJ(i, j);
+				else if (Qchoice == 12)
+					return kernel_besselY(i, j);
+				else if (Qchoice == 13)
+					return Helmholtz_cos(i, j);
+				else if (Qchoice == 14)
+					return Feynman(i, j);
+				else if (Qchoice == 15)
+					return Yukawa(i, j);
+				}
 	}
 	else {
-		if (Qchoice == 0)
-			return RBF_Logarithm(i, j);
-		else if (Qchoice == 1)
-			return RBF_Exponential(i, j);
-		else if (Qchoice == 2)
-			return RBF_Inverse_Quadric(i, j);
-		else if (Qchoice == 3)
-			return RBF_Quadric(i, j);
-		else if (Qchoice == 4)
-			return RBF_Inverse_Multi_Quadric(i, j);
-		else if (Qchoice == 5)
-			return RBF_Gaussian(i, j);
-		else if (Qchoice == 6)
-			return RBF_Multi_quadric(i, j);
-		else if (Qchoice == 7)
-			return Laplacian_3D(i, j);
-		else if (Qchoice == 8)
-			return oneOverR4(i, j);
-		else if (Qchoice == 9)
-			return Laplacian_2D(i, j);
-		else if (Qchoice == 10)
-			return RBF_spline(i, j);
-		else if (Qchoice == 11)
-			return kernel_besselJ(i, j);
-		else if (Qchoice == 12)
-			return kernel_besselY(i, j);
-		else if (Qchoice == 13)
-			return Helmholtz_cos(i, j);
-		else if (Qchoice == 14)
-			return Feynman(i, j);
-		else if (Qchoice == 15)
-			return Yukawa(i, j);
-		}
+		return IE_CUBE_3D(i,j);
+	}
 }
 
 #include "gmres.hpp"
@@ -81,8 +86,8 @@ int main(int argc, char* argv[]) {
 		cubeRootN		=	10;
 		nParticlesInLeafAlong1D	=	8; // assuming the particles are located at tensor product chebyNodes
 		L			=	1.0;
-		TOL_POW = 6;
-		Qchoice = 7;
+		TOL_POW = 7;
+		Qchoice = 16;
 	}
 	else {
 		int cubeRootN		=	atoi(argv[1]);
@@ -106,7 +111,7 @@ int main(int argc, char* argv[]) {
 	end		=	omp_get_wtime();
 
 	double timeHODLR3DRepres =	(end-start);
-	std::cout << std::endl << "Time taken to assemble HODLR3D representation is: " << timeHODLR3DRepres << std::endl;
+	// std::cout << std::endl << "Time taken to assemble HODLR3D representation is: " << timeHODLR3DRepres << std::endl;
 
 	/////////////////////////////////////////////////////////////////////////
 	int N = H->A->N;

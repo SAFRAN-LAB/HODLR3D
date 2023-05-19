@@ -77,10 +77,10 @@ int main(int argc, char* argv[]) {
 	int TOL_POW;
 	int Qchoice;
 	if (argc < 5) {
-		cubeRootN		=	40;
-		nParticlesInLeafAlong1D	=	8; // assuming the particles are located at tensor product chebyNodes
+		cubeRootN		=	20;
+		nParticlesInLeafAlong1D	=	6; // assuming the particles are located at tensor product chebyNodes
 		L			=	1.0;
-		TOL_POW = 6;
+		TOL_POW = 7;
 		Qchoice = 7;
 	}
 	else {

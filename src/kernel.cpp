@@ -62,6 +62,16 @@
 	}
 
 
+	double userkernel::IE_CUBE_3D(const unsigned i,const unsigned j){
+		double res;
+		if(i==j)
+			res = Kii;//  triple_integral();
+		else{
+			res = h3 * Laplacian_3D(i,j);
+		}
+		return res;
+	}
+
 		// RBF Logarithm
 		double userkernel::RBF_Logarithm(const unsigned i, const unsigned j) {
 			pts3D r1 = particles[i];

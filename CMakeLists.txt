@@ -55,6 +55,8 @@ set(HODLR3Dlib_SRCS
     ${PROJECT_SOURCE_DIR}/src/HODLR3DTree.cpp
     ${PROJECT_SOURCE_DIR}/src/HODLR3D.cpp
     ${PROJECT_SOURCE_DIR}/src/gmres.cpp
+    ${PROJECT_SOURCE_DIR}/src/Integral3D.cpp
+    ${PROJECT_SOURCE_DIR}/src/Gauss_Legendre_Nodes_and_Weights.cpp
    )
 
 if(INPUT_FILE)
