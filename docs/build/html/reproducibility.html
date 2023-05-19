@@ -41,10 +41,30 @@
 <li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarks</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Reproducibility</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#numerical-rank-for-different-kernels">Numerical rank for different kernels</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#various-benchmarks-of-hodlr3d-matrix-vector-product-in-comparison-with-those-of-hodlr-and-mathcal-h-matrix-vector-products-for-the-kernel-frac-1-r">Various benchmarks of HODLR3D matrix-vector product in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> matrix-vector products for the kernel <span class="math notranslate nohighlight">\(\frac{1}{r}\)</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#various-benchmarks-of-hodlr3d-matrix-vector-product-in-comparison-with-those-of-hodlr-and-mathcal-h-matrix-vector-products-for-the-kernel-frac-1-r-4">Various benchmarks of HODLR3D matrix-vector product in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> matrix-vector products for the kernel <span class="math notranslate nohighlight">\(\frac{1}{r^4}\)</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#various-benchmarks-of-hodlr3d-matrix-vector-product-in-comparison-with-those-of-hodlr-and-mathcal-h-matrix-vector-products-for-the-kernel-frac-cos-r-r">Various benchmarks of HODLR3D matrix-vector product in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> matrix-vector products for the kernel <span class="math notranslate nohighlight">\(\frac{cos(r)}{r}\)</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#various-benchmarks-of-the-hodlr3d-accelerated-iterative-solver-for-the-integral-equation-in-comparison-with-those-of-hodlr-and-mathcal-h">Various benchmarks of the HODLR3D accelerated iterative solver for the integral equation in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#various-benchmarks-of-hodlr3d-matrix-vector-product-in-comparison-with-those-of-hodlr-and-mathcal-h-matrix-vector-products-for-the-kernel-frac-1-r">Various benchmarks of HODLR3D matrix-vector product in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> matrix-vector products for the kernel <span class="math notranslate nohighlight">\(\frac{1}{r}\)</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hodlr3d">HODLR3D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#h">H</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hodlr">HODLR</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#various-benchmarks-of-hodlr3d-matrix-vector-product-in-comparison-with-those-of-hodlr-and-mathcal-h-matrix-vector-products-for-the-kernel-frac-1-r-4">Various benchmarks of HODLR3D matrix-vector product in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> matrix-vector products for the kernel <span class="math notranslate nohighlight">\(\frac{1}{r^4}\)</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">HODLR3D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">H</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">HODLR</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#various-benchmarks-of-hodlr3d-matrix-vector-product-in-comparison-with-those-of-hodlr-and-mathcal-h-matrix-vector-products-for-the-kernel-frac-cos-r-r">Various benchmarks of HODLR3D matrix-vector product in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> matrix-vector products for the kernel <span class="math notranslate nohighlight">\(\frac{cos(r)}{r}\)</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">HODLR3D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">H</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">HODLR</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#various-benchmarks-of-the-hodlr3d-accelerated-iterative-solver-for-the-integral-equation-in-comparison-with-those-of-hodlr-and-mathcal-h">Various benchmarks of the HODLR3D accelerated iterative solver for the integral equation in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">HODLR3D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">H</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">HODLR</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -96,8 +116,8 @@
 </div>
 <div class="section" id="various-benchmarks-of-hodlr3d-matrix-vector-product-in-comparison-with-those-of-hodlr-and-mathcal-h-matrix-vector-products-for-the-kernel-frac-1-r">
 <h2>Various benchmarks of HODLR3D matrix-vector product in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> matrix-vector products for the kernel <span class="math notranslate nohighlight">\(\frac{1}{r}\)</span><a class="headerlink" href="#various-benchmarks-of-hodlr3d-matrix-vector-product-in-comparison-with-those-of-hodlr-and-mathcal-h-matrix-vector-products-for-the-kernel-frac-1-r" title="Permalink to this headline">¶</a></h2>
-<p>To reproduce the results illustrated in Figure 9 of the article, follow the instructions given here. Key in the file <code class="docutils literal notranslate"><span class="pre">`examples/testHODLR3D.cpp</span></code> as input under <code class="docutils literal notranslate"><span class="pre">INPUT_FILE</span></code> in <code class="docutils literal notranslate"><span class="pre">HODLR3Dlib/CMakeLists.txt</span></code>. Here you also set the name of the output executable, say <code class="docutils literal notranslate"><span class="pre">testHODLR3D</span></code>, under <code class="docutils literal notranslate"><span class="pre">OUTPUT_EXECUTABLE_NAME</span></code>.
-Compile and build the executable as described in <a class="reference internal" href="installation.html#testing"><span class="std std-ref">Testing</span></a>. Then run the executable with the following inputs at runtime</p>
+<p>To reproduce the results illustrated in Figure 9 of the article, follow the instructions given here.</p>
+<p>The following values are inputed at run-time for the three codes HODLR3D, H, and HODLR.</p>
 <ol class="arabic simple">
 <li>cubeRootN = vary between 20 and 150 with a step size of 10</li>
 <li>nParticlesInLeafAlong1D = 6</li>
@@ -105,15 +125,50 @@ Compile and build the executable as described in <a class="reference internal" h
 <li>TOL_POW = 7</li>
 <li>Qchoice = 7</li>
 </ol>
+<div class="section" id="hodlr3d">
+<h3>HODLR3D<a class="headerlink" href="#hodlr3d" title="Permalink to this headline">¶</a></h3>
+<p>Key in the file <code class="docutils literal notranslate"><span class="pre">`examples/testHODLR3D.cpp</span></code> as input under <code class="docutils literal notranslate"><span class="pre">INPUT_FILE</span></code> in <code class="docutils literal notranslate"><span class="pre">HODLR3Dlib/CMakeLists.txt</span></code>. Here you also set the name of the output executable, say <code class="docutils literal notranslate"><span class="pre">testHODLR3D</span></code>, under <code class="docutils literal notranslate"><span class="pre">OUTPUT_EXECUTABLE_NAME</span></code>.
+Compile and build the executable as described in <a class="reference internal" href="installation.html#testing"><span class="std std-ref">Testing</span></a>.</p>
 <p>For example, run the following command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">testHODLR3D</span> <span class="mi">20</span> <span class="mi">6</span> <span class="mf">1.0</span> <span class="mi">7</span> <span class="mi">7</span>
 </pre></div>
 </div>
 </div>
+<div class="section" id="h">
+<h3>H<a class="headerlink" href="#h" title="Permalink to this headline">¶</a></h3>
+<p>Clean using make clean before running the code, i.e.,:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile3D</span><span class="o">.</span><span class="n">mk</span> <span class="n">clean</span>
+</pre></div>
+</div>
+<p>Then make the file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile3D</span><span class="o">.</span><span class="n">mk</span>
+</pre></div>
+</div>
+<p>Run the generated executable as, for instance,:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">testH</span> <span class="mi">20</span> <span class="mi">6</span> <span class="mf">1.0</span> <span class="mi">7</span> <span class="mi">7</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="hodlr">
+<h3>HODLR<a class="headerlink" href="#hodlr" title="Permalink to this headline">¶</a></h3>
+<p>Clean using make clean before running the code, i.e.,:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile3D</span><span class="o">.</span><span class="n">mk</span> <span class="n">clean</span>
+</pre></div>
+</div>
+<p>Then make the file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile3D</span><span class="o">.</span><span class="n">mk</span>
+</pre></div>
+</div>
+<p>Run the generated executable as, for instance,:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">testHODLR</span> <span class="mi">20</span> <span class="mi">6</span> <span class="mf">1.0</span> <span class="mi">7</span> <span class="mi">7</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="section" id="various-benchmarks-of-hodlr3d-matrix-vector-product-in-comparison-with-those-of-hodlr-and-mathcal-h-matrix-vector-products-for-the-kernel-frac-1-r-4">
 <h2>Various benchmarks of HODLR3D matrix-vector product in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> matrix-vector products for the kernel <span class="math notranslate nohighlight">\(\frac{1}{r^4}\)</span><a class="headerlink" href="#various-benchmarks-of-hodlr3d-matrix-vector-product-in-comparison-with-those-of-hodlr-and-mathcal-h-matrix-vector-products-for-the-kernel-frac-1-r-4" title="Permalink to this headline">¶</a></h2>
-<p>To reproduce the results illustrated in Figure 10 of the article, follow the instructions given here. Key in the file <code class="docutils literal notranslate"><span class="pre">`examples/testHODLR3D.cpp</span></code> as input under <code class="docutils literal notranslate"><span class="pre">INPUT_FILE</span></code> in <code class="docutils literal notranslate"><span class="pre">HODLR3Dlib/CMakeLists.txt</span></code>. Here you also set the name of the output executable, say <code class="docutils literal notranslate"><span class="pre">testHODLR3D</span></code>, under <code class="docutils literal notranslate"><span class="pre">OUTPUT_EXECUTABLE_NAME</span></code>.
-Compile and build the executable as described in <a class="reference internal" href="installation.html#testing"><span class="std std-ref">Testing</span></a>. Then run the executable with the following inputs at runtime</p>
+<p>To reproduce the results illustrated in Figure 10 of the article, follow the instructions given here.</p>
+<p>The following values are inputed at run-time for the three codes HODLR3D, H, and HODLR.</p>
 <ol class="arabic simple">
 <li>cubeRootN = vary between 20 and 150 with a step size of 10</li>
 <li>nParticlesInLeafAlong1D = 6</li>
@@ -121,15 +176,50 @@ Compile and build the executable as described in <a class="reference internal" h
 <li>TOL_POW = 7</li>
 <li>Qchoice = 8</li>
 </ol>
+<div class="section" id="id1">
+<h3>HODLR3D<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Key in the file <code class="docutils literal notranslate"><span class="pre">`examples/testHODLR3D.cpp</span></code> as input under <code class="docutils literal notranslate"><span class="pre">INPUT_FILE</span></code> in <code class="docutils literal notranslate"><span class="pre">HODLR3Dlib/CMakeLists.txt</span></code>. Here you also set the name of the output executable, say <code class="docutils literal notranslate"><span class="pre">testHODLR3D</span></code>, under <code class="docutils literal notranslate"><span class="pre">OUTPUT_EXECUTABLE_NAME</span></code>.
+Compile and build the executable as described in <a class="reference internal" href="installation.html#testing"><span class="std std-ref">Testing</span></a>.</p>
 <p>For example, run the following command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">testHODLR3D</span> <span class="mi">20</span> <span class="mi">6</span> <span class="mf">1.0</span> <span class="mi">7</span> <span class="mi">8</span>
 </pre></div>
 </div>
 </div>
+<div class="section" id="id2">
+<h3>H<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Clean using make clean before running the code, i.e.,:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile3D</span><span class="o">.</span><span class="n">mk</span> <span class="n">clean</span>
+</pre></div>
+</div>
+<p>Then make the file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile3D</span><span class="o">.</span><span class="n">mk</span>
+</pre></div>
+</div>
+<p>Run the generated executable as, for instance,:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">testH</span> <span class="mi">20</span> <span class="mi">6</span> <span class="mf">1.0</span> <span class="mi">7</span> <span class="mi">8</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>HODLR<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Clean using make clean before running the code, i.e.,:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile3D</span><span class="o">.</span><span class="n">mk</span> <span class="n">clean</span>
+</pre></div>
+</div>
+<p>Then make the file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile3D</span><span class="o">.</span><span class="n">mk</span>
+</pre></div>
+</div>
+<p>Run the generated executable as, for instance,:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">testHODLR</span> <span class="mi">20</span> <span class="mi">6</span> <span class="mf">1.0</span> <span class="mi">7</span> <span class="mi">8</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="section" id="various-benchmarks-of-hodlr3d-matrix-vector-product-in-comparison-with-those-of-hodlr-and-mathcal-h-matrix-vector-products-for-the-kernel-frac-cos-r-r">
 <h2>Various benchmarks of HODLR3D matrix-vector product in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> matrix-vector products for the kernel <span class="math notranslate nohighlight">\(\frac{cos(r)}{r}\)</span><a class="headerlink" href="#various-benchmarks-of-hodlr3d-matrix-vector-product-in-comparison-with-those-of-hodlr-and-mathcal-h-matrix-vector-products-for-the-kernel-frac-cos-r-r" title="Permalink to this headline">¶</a></h2>
-<p>To reproduce the results illustrated in Figure 11 of the article, follow the instructions given here. Key in the file <code class="docutils literal notranslate"><span class="pre">`examples/testHODLR3D.cpp</span></code> as input under <code class="docutils literal notranslate"><span class="pre">INPUT_FILE</span></code> in <code class="docutils literal notranslate"><span class="pre">HODLR3Dlib/CMakeLists.txt</span></code>. Here you also set the name of the output executable, say <code class="docutils literal notranslate"><span class="pre">testHODLR3D</span></code>, under <code class="docutils literal notranslate"><span class="pre">OUTPUT_EXECUTABLE_NAME</span></code>.
-Compile and build the executable as described in <a class="reference internal" href="installation.html#testing"><span class="std std-ref">Testing</span></a>. Then run the executable with the following inputs at runtime</p>
+<p>To reproduce the results illustrated in Figure 11 of the article, follow the instructions given here.</p>
+<p>The following values are inputed at run-time for the three codes HODLR3D, H, and HODLR.</p>
 <ol class="arabic simple">
 <li>cubeRootN = vary between 20 and 150 with a step size of 10</li>
 <li>nParticlesInLeafAlong1D = 6</li>
@@ -137,15 +227,50 @@ Compile and build the executable as described in <a class="reference internal" h
 <li>TOL_POW = 7</li>
 <li>Qchoice = 13</li>
 </ol>
+<div class="section" id="id4">
+<h3>HODLR3D<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>Key in the file <code class="docutils literal notranslate"><span class="pre">`examples/testHODLR3D.cpp</span></code> as input under <code class="docutils literal notranslate"><span class="pre">INPUT_FILE</span></code> in <code class="docutils literal notranslate"><span class="pre">HODLR3Dlib/CMakeLists.txt</span></code>. Here you also set the name of the output executable, say <code class="docutils literal notranslate"><span class="pre">testHODLR3D</span></code>, under <code class="docutils literal notranslate"><span class="pre">OUTPUT_EXECUTABLE_NAME</span></code>.
+Compile and build the executable as described in <a class="reference internal" href="installation.html#testing"><span class="std std-ref">Testing</span></a>.</p>
 <p>For example, run the following command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">testHODLR3D</span> <span class="mi">20</span> <span class="mi">6</span> <span class="mf">1.0</span> <span class="mi">7</span> <span class="mi">13</span>
 </pre></div>
 </div>
 </div>
+<div class="section" id="id5">
+<h3>H<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>Clean using make clean before running the code, i.e.,:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile3D</span><span class="o">.</span><span class="n">mk</span> <span class="n">clean</span>
+</pre></div>
+</div>
+<p>Then make the file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile3D</span><span class="o">.</span><span class="n">mk</span>
+</pre></div>
+</div>
+<p>Run the generated executable as, for instance,:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">testH</span> <span class="mi">20</span> <span class="mi">6</span> <span class="mf">1.0</span> <span class="mi">7</span> <span class="mi">13</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h3>HODLR<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>Clean using make clean before running the code, i.e.,:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile3D</span><span class="o">.</span><span class="n">mk</span> <span class="n">clean</span>
+</pre></div>
+</div>
+<p>Then make the file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile3D</span><span class="o">.</span><span class="n">mk</span>
+</pre></div>
+</div>
+<p>Run the generated executable as, for instance,:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">testHODLR</span> <span class="mi">20</span> <span class="mi">6</span> <span class="mf">1.0</span> <span class="mi">7</span> <span class="mi">13</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="section" id="various-benchmarks-of-the-hodlr3d-accelerated-iterative-solver-for-the-integral-equation-in-comparison-with-those-of-hodlr-and-mathcal-h">
 <h2>Various benchmarks of the HODLR3D accelerated iterative solver for the integral equation in comparison with those of HODLR and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span><a class="headerlink" href="#various-benchmarks-of-the-hodlr3d-accelerated-iterative-solver-for-the-integral-equation-in-comparison-with-those-of-hodlr-and-mathcal-h" title="Permalink to this headline">¶</a></h2>
-<p>To reproduce the results illustrated in Figure 12 of the article, follow the instructions given here. Key in the file <code class="docutils literal notranslate"><span class="pre">`examples/testHODLR3Dsolve.cpp</span></code> as input under <code class="docutils literal notranslate"><span class="pre">INPUT_FILE</span></code> in <code class="docutils literal notranslate"><span class="pre">HODLR3Dlib/CMakeLists.txt</span></code>. Here you also set the name of the output executable, say <code class="docutils literal notranslate"><span class="pre">testHODLR3Dsolve</span></code>, under <code class="docutils literal notranslate"><span class="pre">OUTPUT_EXECUTABLE_NAME</span></code>.
-Compile and build the executable as described in <a class="reference internal" href="installation.html#testing"><span class="std std-ref">Testing</span></a>. Then run the executable with the following inputs at runtime</p>
+<p>To reproduce the results illustrated in Figure 12 of the article, follow the instructions given here.</p>
+<p>The following values are inputed at run-time for the three codes HODLR3D, H, and HODLR.</p>
 <ol class="arabic simple">
 <li>cubeRootN = vary between 20 and 150 with a step size of 10</li>
 <li>nParticlesInLeafAlong1D = 6</li>
@@ -153,9 +278,44 @@ Compile and build the executable as described in <a class="reference internal" h
 <li>TOL_POW = 7</li>
 <li>Qchoice = 16</li>
 </ol>
+<div class="section" id="id7">
+<h3>HODLR3D<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>Key in the file <code class="docutils literal notranslate"><span class="pre">`examples/testHODLR3Dsolve.cpp</span></code> as input under <code class="docutils literal notranslate"><span class="pre">INPUT_FILE</span></code> in <code class="docutils literal notranslate"><span class="pre">HODLR3Dlib/CMakeLists.txt</span></code>. Here you also set the name of the output executable, say <code class="docutils literal notranslate"><span class="pre">testHODLR3Dsolve</span></code>, under <code class="docutils literal notranslate"><span class="pre">OUTPUT_EXECUTABLE_NAME</span></code>.
+Compile and build the executable as described in <a class="reference internal" href="installation.html#testing"><span class="std std-ref">Testing</span></a>.</p>
 <p>For example, run the following command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">testHODLR3Dsolve</span> <span class="mi">20</span> <span class="mi">6</span> <span class="mf">1.0</span> <span class="mi">7</span> <span class="mi">16</span>
 </pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h3>H<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p>Clean using make clean before running the code, i.e.,:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile3Dsolve</span><span class="o">.</span><span class="n">mk</span> <span class="n">clean</span>
+</pre></div>
+</div>
+<p>Then make the file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile3Dsolve</span><span class="o">.</span><span class="n">mk</span>
+</pre></div>
+</div>
+<p>Run the generated executable as, for instance,:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">testH</span> <span class="mi">20</span> <span class="mi">6</span> <span class="mf">1.0</span> <span class="mi">7</span> <span class="mi">16</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id9">
+<h3>HODLR<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<p>Clean using make clean before running the code, i.e.,:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile3Dsolve</span><span class="o">.</span><span class="n">mk</span> <span class="n">clean</span>
+</pre></div>
+</div>
+<p>Then make the file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile3Dsolve</span><span class="o">.</span><span class="n">mk</span>
+</pre></div>
+</div>
+<p>Run the generated executable as, for instance,:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">testHODLR</span> <span class="mi">20</span> <span class="mi">6</span> <span class="mf">1.0</span> <span class="mi">7</span> <span class="mi">16</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
