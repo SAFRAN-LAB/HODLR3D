@@ -2,7 +2,8 @@
 Reproducibility
 ***************
 
-This part of the documentation helps in reproducing the results shown in the article titled "HODLR3D: Hierarchical matrices for :math:`N`-body problems in three dimensions".
+This part of the documentation helps in reproducing the results shown in the article titled **HODLR3D: Hierarchical matrices for**  :math:`N`-**body problems in three dimensions**, authored by **V A Kandappan, Vaishnavi Gujjula, Sivaram Ambikasaran**.
+The code is available as an open source library and can be found `here <https://github.com/SAFRAN-LAB/HODLR3D>`_.
 
 Numerical rank for different kernels
 ------------------------------------

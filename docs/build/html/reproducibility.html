@@ -16,6 +16,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Various interactions in 3D and their ranks" href="theorem.html" />
     <link rel="prev" title="Benchmarks" href="benchmarks.html" /> 
 </head>
 
@@ -68,6 +69,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#numerical-benchmarks-of-parallel-hodlr3d-matrix-vector-product-using-mpi">Numerical benchmarks of parallel HODLR3D matrix-vector product using MPI</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="theorem.html">Various interactions in 3D and their ranks</a></li>
 </ul>
 
         </div>
@@ -96,7 +98,8 @@
              
   <div class="section" id="reproducibility">
 <h1>Reproducibility<a class="headerlink" href="#reproducibility" title="Permalink to this headline">¶</a></h1>
-<p>This part of the documentation helps in reproducing the results shown in the article titled “HODLR3D: Hierarchical matrices for <span class="math notranslate nohighlight">\(N\)</span>-body problems in three dimensions”.</p>
+<p>This part of the documentation helps in reproducing the results shown in the article titled <strong>HODLR3D: Hierarchical matrices for</strong>  <span class="math notranslate nohighlight">\(N\)</span>-<strong>body problems in three dimensions</strong>, authored by <strong>V A Kandappan, Vaishnavi Gujjula, Sivaram Ambikasaran</strong>.
+The code is available as an open source library and can be found <a class="reference external" href="https://github.com/SAFRAN-LAB/HODLR3D">here</a>.</p>
 <div class="section" id="numerical-rank-for-different-kernels">
 <h2>Numerical rank for different kernels<a class="headerlink" href="#numerical-rank-for-different-kernels" title="Permalink to this headline">¶</a></h2>
 <p>To obtain Figure 5 (numerical rank vs N) and Figure 7 (Plot of singular values <span class="math notranslate nohighlight">\(\sigma_{i}\)</span> normalized with the first singular value versus index <span class="math notranslate nohighlight">\(i\)</span>) of the article, the following steps are to be followed</p>
@@ -411,6 +414,7 @@ user@computer build$ mpiexec.hydra -np 2 -genv I_MPI_PIN=1 -genv I_MPI_FABRICS=s
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="benchmarks.html" class="btn btn-neutral float-left" title="Benchmarks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="theorem.html" class="btn btn-neutral float-right" title="Various interactions in 3D and their ranks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
