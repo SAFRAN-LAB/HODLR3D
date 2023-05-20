@@ -30,7 +30,7 @@ Numerical benchmarks of HODLR3D matrix-vector product in comparison with those o
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 To reproduce the results illustrated in Figure 9 of the article, follow the instructions given here.
 
-The following values are inputed at run-time for the three codes HODLR3D, H, and HODLR.
+The following values are inputed at run-time for the three codes HODLR3D, :math:`\mathcal{H}`, and HODLR.
 
 1. cubeRootN = vary between 20 and 150 with a step size of 10
 2. nParticlesInLeafAlong1D = 6
@@ -48,8 +48,8 @@ For example, run the following command::
 
    ./testHODLR3D 20 6 1.0 7 7
 
-H
-^
+:math:`\mathcal{H}`
+^^^^^^^^^^^^^^^^^^^
 
 Clean using make clean before running the code, i.e.,::
 
@@ -84,7 +84,7 @@ Numerical benchmarks of HODLR3D matrix-vector product in comparison with those o
 
 To reproduce the results illustrated in Figure 10 of the article, follow the instructions given here.
 
-The following values are inputed at run-time for the three codes HODLR3D, H, and HODLR.
+The following values are inputed at run-time for the three codes HODLR3D, :math:`\mathcal{H}`, and HODLR.
 
 1. cubeRootN = vary between 20 and 150 with a step size of 10
 2. nParticlesInLeafAlong1D = 6
@@ -102,8 +102,8 @@ For example, run the following command::
 
    ./testHODLR3D 20 6 1.0 7 8
 
-H
-^
+:math:`\mathcal{H}`
+^^^^^^^^^^^^^^^^^^^
 
 Clean using make clean before running the code, i.e.,::
 
@@ -138,7 +138,7 @@ Numerical benchmarks of HODLR3D matrix-vector product in comparison with those o
 
 To reproduce the results illustrated in Figure 11 of the article, follow the instructions given here.
 
-The following values are inputed at run-time for the three codes HODLR3D, H, and HODLR.
+The following values are inputed at run-time for the three codes HODLR3D, :math:`\mathcal{H}`, and HODLR.
 
 1. cubeRootN = vary between 20 and 150 with a step size of 10
 2. nParticlesInLeafAlong1D = 6
@@ -156,8 +156,8 @@ For example, run the following command::
 
    ./testHODLR3D 20 6 1.0 7 13
 
-H
-^
+:math:`\mathcal{H}`
+^^^^^^^^^^^^^^^^^^^
 
 Clean using make clean before running the code, i.e.,::
 
@@ -192,7 +192,7 @@ Numerical benchmarks of the HODLR3D accelerated iterative solver for the integra
 
 To reproduce the results illustrated in Figure 12 of the article, follow the instructions given here.
 
-The following values are inputed at run-time for the three codes HODLR3D, H, and HODLR.
+The following values are inputed at run-time for the three codes HODLR3D, :math:`\mathcal{H}`, and HODLR.
 
 1. cubeRootN = vary between 20 and 150 with a step size of 10
 2. nParticlesInLeafAlong1D = 6
@@ -210,8 +210,9 @@ For example, run the following command::
 
    ./testHODLR3Dsolve 20 6 1.0 7 16
 
-H
-^
+
+:math:`\mathcal{H}`
+^^^^^^^^^^^^^^^^^^^
 
 Clean using make clean before running the code, i.e.,::
 

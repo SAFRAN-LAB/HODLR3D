@@ -37,7 +37,8 @@ Doc Contents
    tutorial
    benchmarks
    reproducibility
-
+   theorem
+   
 Other Links
 ===========
 
