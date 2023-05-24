@@ -42,7 +42,7 @@ public:
 
   userkernel(std::vector<pts3D> particles, int Qchoice): kernel(particles) {
     this->Qchoice = Qchoice;
-    if(Qchoice == 17){
+    if(Qchoice == 16){
       double h = 1.0/cbrt(double(particles.size()));
       double *a,*b;
       a = new double[3];
