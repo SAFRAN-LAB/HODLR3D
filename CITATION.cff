@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "V A"
+  given-names: "Kandappan"
+  orcid: "https://orcid.org/0000-0003-4512-7497"
+- family-names: "Gujjula"
+  given-names: "Vaishnavi"
+  orcid: "https://orcid.org/0000-0003-2742-1561"
+- family-names: "Ambikasaran"
+  given-names: "Sivaram"
+
+title: "HODLR3Dlib"
+version: v1.0.1
+doi: 10.5281/zenodo.8475
+date-released: 2023-06-19
+url: "https://github.com/SAFRAN-LAB/HODLR3D"
