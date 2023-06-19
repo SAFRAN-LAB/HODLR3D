@@ -1,5 +1,7 @@
 # HODLR3Dlib
 
+[![DOI](https://zenodo.org/badge/605983723.svg)](https://zenodo.org/badge/latestdoi/605983723)
+
 HODLR3Dlib introduces a new class of hierarchical matrices for N-body problems in 3D. It performs matrix vector product in almost linear complexity. The domain is subdivided using a uniform tree. Low rank approximation of the appropriate submatrices has been obtained using Adaptive Cross Approximation. The code has been parallelised using MPI.
 
 The code in this repository helps reproduce the tables, figures and algorithms discussed in the Manuscript:
